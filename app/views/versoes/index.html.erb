@@ -1,0 +1,24 @@
+<h1><%= t('app.menu.listagem')%>&nbsp;<%= t('app.menu.versao')%></h1>
+
+<% if @versoes.size > 0  %>
+	<table class="zebra-striped">
+ 	 <tr>
+	    <th width="70%"><%= t('versao.descricao')%></th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+
+	<% @versoes.each do |versao| %>
+	  <tr>
+	    <td><%= versao.descricao %></td>
+	    <td><%= link_to t('botao.detalhes'), versao %></td>
+	    <td><%= link_to t('botao.editar'), edit_versao_path(versao) %></td>
+	    <td><%= link_to t('botao.excluir'), versao, confirm: 'Tem certeza que deseja excluir este registro?', method: :delete %></td>
+	  </tr>
+	<% end %>
+	</table>
+<% end %>
+<br />
+
+<a href="<%= new_versao_path %>"><button class="btn" name="btnpesquisa"><%= t('versao.acao.novo')%></button></a>

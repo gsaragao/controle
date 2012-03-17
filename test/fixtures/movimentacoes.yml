@@ -1,0 +1,51 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  tecnico: 
+  data_movimentacao: 2012-03-16
+  serie: MyString
+  patrimonio: MyString
+  versao: 
+  modelo: 
+  data_entrada: 2012-03-16
+  status: MyString
+  ordem_servico: MyString
+  data_relatorio: 2012-03-16
+  codigo_fiscal: MyString
+  data_nota_fiscal: 2012-03-16
+  nota_fiscal: MyString
+  nfe: MyString
+  observacao: MyText
+  termo_file_name: MyString
+  termo_content_type: MyString
+  termo_file_size: 1
+  termo_updated_at: 2012-03-16 11:38:42
+  retirado: MyString
+  ativo: MyString
+  nid: 1
+  versao: 1
+
+two:
+  tecnico: 
+  data_movimentacao: 2012-03-16
+  serie: MyString
+  patrimonio: MyString
+  versao: 
+  modelo: 
+  data_entrada: 2012-03-16
+  status: MyString
+  ordem_servico: MyString
+  data_relatorio: 2012-03-16
+  codigo_fiscal: MyString
+  data_nota_fiscal: 2012-03-16
+  nota_fiscal: MyString
+  nfe: MyString
+  observacao: MyText
+  termo_file_name: MyString
+  termo_content_type: MyString
+  termo_file_size: 1
+  termo_updated_at: 2012-03-16 11:38:42
+  retirado: MyString
+  ativo: MyString
+  nid: 1
+  versao: 1

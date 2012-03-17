@@ -1,0 +1,89 @@
+<h1><%= t("movimentacao.acao.detalhar") %></h1>
+<table>
+	<tr><td>
+	<p>
+	  <b>Tecnico:</b>
+	  <%= @movimentacao.tecnico.nome %>
+	</p>
+
+	<p>
+	  <b>Data movimentacao:</b>
+	  <%= @movimentacao.data_movimentacao %>
+	</p>
+
+	<p>
+	  <b>Serie:</b>
+	  <%= @movimentacao.serie %>
+	</p>
+
+	<p>
+	  <b>Patrimonio:</b>
+	  <%= @movimentacao.patrimonio %>
+	</p>
+
+	<p>
+	  <b>Versao:</b>
+	  <%= @movimentacao.versao.descricao %>
+	</p>
+
+	<p>
+	  <b>Modelo:</b>
+	  <%= @movimentacao.modelo.descricao %>
+	</p>
+
+	<p>
+	  <b>Data entrada:</b>
+	  <%= @movimentacao.data_entrada %>
+	</p>
+
+	<p>
+	  <b>Status:</b>
+	  <%= @movimentacao.status %>
+	</p>
+	</td>
+	<td>
+	<p>
+	  <b>Ordem servico:</b>
+	  <%= @movimentacao.ordem_servico %>
+	</p>
+
+	<p>
+	  <b>Data relatorio:</b>
+	  <%= @movimentacao.data_relatorio %>
+	</p>
+
+	<p>
+	  <b>Codigo fiscal:</b>
+	  <%= @movimentacao.codigo_fiscal %>
+	</p>
+
+	<p>
+	  <b>Data nota fiscal:</b>
+	  <%= @movimentacao.data_nota_fiscal %>
+	</p>
+
+	<p>
+	  <b>Nota fiscal:</b>
+	  <%= @movimentacao.nota_fiscal %>
+	</p>
+
+	<p>
+	  <b>Nfe:</b>
+	  <%= @movimentacao.nfe %>
+	</p>
+
+	<p>
+	  <b>Observacao:</b>
+	  <%= @movimentacao.observacao %>
+	</p>
+	<p>
+	  <b>Retirado:</b>
+	  <%= @movimentacao.retirado %>
+	</p>
+	</td>
+	</tr>
+</table>
+<div class="actionsShow">
+	<a href="<%= edit_movimentacao_path %>"><button class="btn primary" name="btnback"><%= t('botao.editar')%></button></a>&nbsp; 
+	<a href="<%= movimentacoes_path %>"><button class="btn" name="btnback"><%= t('botao.voltar')%></button></a>
+</div>

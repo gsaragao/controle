@@ -1,0 +1,24 @@
+<h1><%= t('app.menu.listagem')%>&nbsp;<%= t('app.menu.destino')%></h1>
+
+<% if @destinos.size > 0  %>
+	<table class="zebra-striped">
+	 <tr>
+	   <th width="70%"><%= t('destino.descricao')%></th>
+	   <th></th>
+	   <th></th>
+	   <th></th>
+	 </tr>
+
+	<% @destinos.each do |destino| %>
+	 <tr>
+	   <td><%= destino.descricao %></td>
+	    <td><%= link_to t('botao.detalhes'), destino %></td>
+	    <td><%= link_to t('botao.editar'), edit_destino_path(destino) %></td>
+	    <td><%= link_to t('botao.excluir'), destino, confirm: 'Tem certeza que deseja excluir este registro?', method: :delete %></td>
+	 </tr>
+	<% end %>
+	</table>
+<% end %>
+<br />
+
+<a href="<%= new_destino_path %>"><button class="btn" name="btnpesquisa"><%= t('destino.acao.novo')%></button></a>

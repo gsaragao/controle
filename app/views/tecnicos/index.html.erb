@@ -1,0 +1,25 @@
+<h1><%= t('app.menu.listagem')%>&nbsp;<%= t('app.menu.tecnico')%></h1>
+
+<% if @tecnicos.size > 0  %>
+	<table class="zebra-striped">
+	  <tr>
+	    <th width="35%"><%= t('tecnico.nome')%></th>
+	    <th width="35%"><%= t('tecnico.cpf')%></th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+
+	<% @tecnicos.each do |tecnico| %>
+	  <tr>
+	    <td><%= tecnico.nome %></td>
+	    <td><%= tecnico.cpf %></td>
+	    <td><%= link_to t('botao.detalhes'), tecnico %></td>
+	    <td><%= link_to t('botao.editar'), edit_tecnico_path(tecnico) %></td>
+	    <td><%= link_to t('botao.excluir'), tecnico, confirm: 'Tem certeza que deseja excluir este registro?', method: :delete %></td>
+	  </tr>
+	<% end %>
+	</table>
+<% end %>
+<br />
+<a href="<%= new_tecnico_path %>"><button class="btn" name="btnpesquisa"><%= t('tecnico.acao.novo')%></button></a>

@@ -1,0 +1,24 @@
+<h1><%= t('app.menu.listagem')%>&nbsp;<%= t('app.menu.modelo')%></h1>
+
+<% if @modelos.size > 0  %>
+	<table class="zebra-striped">
+	  <tr>
+	    <th width="70%"><%= t('modelo.descricao')%></th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+
+	<% @modelos.each do |modelo| %>
+	  <tr>
+	    <td><%= modelo.descricao %></td>
+	    <td><%= link_to t('botao.detalhes'), modelo %></td>
+	    <td><%= link_to t('botao.editar'), edit_modelo_path(modelo) %></td>
+	    <td><%= link_to t('botao.excluir'), modelo, confirm: 'Tem certeza que deseja excluir este registro?', method: :delete %></td>
+	  </tr>
+	<% end %>
+	</table>
+<% end %>
+<br />
+
+<a href="<%= new_modelo_path %>"><button class="btn" name="btnpesquisa"><%= t('modelo.acao.novo')%></button></a>
