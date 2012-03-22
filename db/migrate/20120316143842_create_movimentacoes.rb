@@ -2,7 +2,7 @@ class CreateMovimentacoes < ActiveRecord::Migration
   def change
     create_table :movimentacoes do |t|
       t.integer :nid
-      t.integer :versao
+      t.integer :version
       t.string :ativo
       t.references :tecnico
       t.date :data_movimentacao

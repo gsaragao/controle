@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 20120316143842) do
 
   create_table "movimentacoes", :force => true do |t|
     t.integer  "nid"
-    t.integer  "versao"
+    t.integer  "version"
     t.string   "ativo"
     t.integer  "tecnico_id"
     t.date     "data_movimentacao"

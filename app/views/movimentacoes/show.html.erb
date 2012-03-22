@@ -3,7 +3,7 @@
 	<tr><td>
 	<p>
 	  <b>Tecnico:</b>
-	  <%= @movimentacao.tecnico.nome %>
+	  <%= @movimentacao.tecnico.nome if @movimentacao.tecnico %>
 	</p>
 
 	<p>
@@ -23,12 +23,12 @@
 
 	<p>
 	  <b>Versao:</b>
-	  <%= @movimentacao.versao.descricao %>
+	  <%= @movimentacao.versao.descricao if @movimentacao.versao %>
 	</p>
 
 	<p>
 	  <b>Modelo:</b>
-	  <%= @movimentacao.modelo.descricao %>
+	  <%= @movimentacao.modelo.descricao if @movimentacao.modelo %>
 	</p>
 
 	<p>
@@ -38,15 +38,17 @@
 
 	<p>
 	  <b>Status:</b>
-	  <%= @movimentacao.status %>
+	  <%= @movimentacao.lista_status.key(@movimentacao.status) if @movimentacao.status %>
 	</p>
-	</td>
-	<td>
+
 	<p>
 	  <b>Ordem servico:</b>
 	  <%= @movimentacao.ordem_servico %>
 	</p>
-
+	
+   </td>
+   <td>
+		
 	<p>
 	  <b>Data relatorio:</b>
 	  <%= @movimentacao.data_relatorio %>
@@ -80,6 +82,12 @@
 	  <b>Retirado:</b>
 	  <%= @movimentacao.retirado %>
 	</p>
+	
+	<p>
+	  <b>Termo:</b>
+	  <%= link_to "#{@movimentacao.termo_file_name}", @movimentacao.termo.url, :target => "_blank" %>
+	</p>
+	
 	</td>
 	</tr>
 </table>
