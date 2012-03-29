@@ -4,8 +4,7 @@ class Movimentacao < ActiveRecord::Base
   belongs_to :modelo
   has_attached_file :termo
   validates_presence_of :patrimonio, :tecnico_id, :data_entrada
-  paginates_per 2
-  
+  self.per_page = 10
   attr_accessor :lista_status
   after_initialize :default_values  
   
@@ -74,8 +73,8 @@ class Movimentacao < ActiveRecord::Base
       where("nid = ? and version = ?", nid, @versao).first
    end    
    
-   def self.find_ativo
-      where("ativo = ?", "S")
+   def self.find_ativo(page)
+      where(:ativo => "S").paginate(:page => page)
    end
    
 end

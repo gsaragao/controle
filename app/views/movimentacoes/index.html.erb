@@ -31,7 +31,10 @@
  <% end %>
  </table>
 <% end %>
-<%= paginate @movimentacoes %>
+
+<div class="apple_pagination">
+    <%= will_paginate @movimentacoes, :container => false, :next_label => 'Próximo', :previous_label => 'Anterior' %>
+  </div>
 <br />
 
 <a href="<%= new_movimentacao_path %>"><button class="btn" name="btnpesquisa"><%= t('movimentacao.acao.novo')%></button></a>

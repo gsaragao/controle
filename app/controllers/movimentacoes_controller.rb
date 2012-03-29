@@ -4,7 +4,7 @@ class MovimentacoesController < ApplicationController
   respond_to :html
 
   def index
-    @movimentacoes = Movimentacao.find_ativo.page params[:page]
+    @movimentacoes = Movimentacao.find_ativo(params[:page])
     respond_with @movimentacoes
   end
 
