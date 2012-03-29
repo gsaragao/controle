@@ -1,15 +1,16 @@
 <%= form_for(@tecnico) do |f| %>
-  <% if @tecnico.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@tecnico.errors.count, "error") %> prohibited this tecnico from being saved:</h2>
-
-      <ul>
-      <% @tecnico.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% if @tecnico.errors.any? %>
+<fieldset id="erros">
+   <div class="ui-state-error ui-corner-all" style="padding: 5px; width: 50%">
+     <h3><%= t('errors.messages.titulo') %>:</h3>
+     <ul>
+       <% @tecnico.errors.full_messages.each do |msg| %>
+           <li><%= msg %></li>
+         <% end %>
+     </ul>
+   </div>
+</fieldset>
+<% end %>
 <hr>
   <div class="clearfix">
     <%= f.label :nome %>

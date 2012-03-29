@@ -18,12 +18,12 @@
  <% @movimentacoes.each do |movimentacao| %>
   <tr>
     <td><%= movimentacao.tecnico.nome %></td>
-    <td><%= movimentacao.data_movimentacao %></td>
+	<td><%= I18n.l(movimentacao.data_movimentacao) if movimentacao.data_movimentacao %></td>
     <td><%= movimentacao.serie %></td>
-    <td><%= movimentacao.data_entrada %></td>
+    <td><%= I18n.l(movimentacao.data_entrada) if movimentacao.data_entrada %></td>
     <td><%= movimentacao.lista_status.key(movimentacao.status) if movimentacao.status %></td>
     <td><%= movimentacao.ordem_servico %></td>
-    <td><%= movimentacao.data_relatorio %></td>
+    <td><%= I18n.l(movimentacao.data_relatorio) if movimentacao.data_relatorio %></td>
     <td><%= link_to t('botao.detalhes'), movimentacao %></td>
     <td><%= link_to t('botao.editar'), edit_movimentacao_path(movimentacao) %></td>
     <td><%= link_to t('botao.excluir'), movimentacao, confirm: 'Tem certeza que deseja excluir este registro?', method: :delete %></td>
@@ -31,6 +31,7 @@
  <% end %>
  </table>
 <% end %>
+<%= paginate @movimentacoes %>
 <br />
 
 <a href="<%= new_movimentacao_path %>"><button class="btn" name="btnpesquisa"><%= t('movimentacao.acao.novo')%></button></a>

@@ -1,15 +1,16 @@
 <%= form_for(@versao) do |f| %>
-  <% if @versao.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@versao.errors.count, "error") %> prohibited this versao from being saved:</h2>
-
-      <ul>
-      <% @versao.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% if @versao.errors.any? %>
+<fieldset id="erros">
+   <div class="ui-state-error ui-corner-all" style="padding: 5px; width: 50%">
+     <h3><%= t('errors.messages.titulo') %>:</h3>
+     <ul>
+       <% @versao.errors.full_messages.each do |msg| %>
+           <li><%= msg %></li>
+         <% end %>
+     </ul>
+   </div>
+</fieldset>
+<% end %>
 <hr>
   <div class="clearfix">
     <%= f.label :descricao %>

@@ -3,8 +3,8 @@ class Movimentacao < ActiveRecord::Base
   belongs_to :versao
   belongs_to :modelo
   has_attached_file :termo
-  validates_presence_of :patrimonio
-  validates_presence_of :tecnico_id
+  validates_presence_of :patrimonio, :tecnico_id, :data_entrada
+  paginates_per 2
   
   attr_accessor :lista_status
   after_initialize :default_values  
@@ -64,8 +64,18 @@ class Movimentacao < ActiveRecord::Base
    validates_attachment_size :termo, :less_than=> 2.megabytes,   
                                       :message => I18n.t('movimentacao.arquivo_valida.tamanho')
   
+   def self.ultimo_nid
+      @nid_max = maximum(:nid)
+      where("nid = ?", @nid_max).first
+   end 
+   
    def self.ultima_versao(nid)
-     @versao = maximum(:version, :conditions => ['nid = ?', nid])
-     where("nid = ? and version = ?", nid, @versao) 
-   end   
+      @versao = maximum(:version, :conditions => ['nid = ?', nid])
+      where("nid = ? and version = ?", nid, @versao).first
+   end    
+   
+   def self.find_ativo
+      where("ativo = ?", "S")
+   end
+   
 end

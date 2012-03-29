@@ -12,7 +12,15 @@
       home: Home
       listagem: Listagem
       movimentacao: Movimentação
-
+ 
+  views:
+      pagination:
+        previous: "&lt; Anterior"
+        next: "Próximo &gt;"
+        truncate: "..."
+        last: "Último"
+        first: "Primeiro"
+ 
   home:
     titulo: Painel Geral
     registros: registros(s)

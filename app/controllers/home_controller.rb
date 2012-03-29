@@ -7,6 +7,7 @@ class HomeController < ApplicationController
     @modelos = Modelo.all
     @versoes = Versao.all
     @tecnicos = Tecnico.all
+    @movimentacoes = Movimentacao.all
   end  
   
   private

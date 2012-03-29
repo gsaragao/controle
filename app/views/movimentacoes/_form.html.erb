@@ -1,15 +1,16 @@
 <%= form_for(@movimentacao) do |f| %>
-  <% if @movimentacao.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@movimentacao.errors.count, "error") %> prohibited this movimentacao from being saved:</h2>
-
-      <ul>
-      <% @movimentacao.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% if @movimentacao.errors.any? %>
+<fieldset id="erros">
+   <div class="ui-state-error ui-corner-all" style="padding: 5px; width: 50%">
+     <h3><%= t('errors.messages.titulo') %>:</h3>
+     <ul>
+       <% @movimentacao.errors.full_messages.each do |msg| %>
+           <li><%= msg %></li>
+         <% end %>
+     </ul>
+   </div>
+</fieldset>
+<% end %>
 <table>
   <tr><td>	 
   <div class="clearfix">
@@ -22,7 +23,7 @@
   <div class="clearfix">
     <%= f.label :data_movimentacao %>
     <div class="input">
-    <%= f.text_field :data_movimentacao %>	
+    <%= f.text_field :data_movimentacao, :value => (I18n.l(@movimentacao.data_movimentacao) if @movimentacao.data_movimentacao) %>	
     </div>
   </div>
   <div class="clearfix">
@@ -54,7 +55,7 @@
   <div class="clearfix">
     <%= f.label :data_entrada %>
     <div class="input">
-    	<%= f.text_field :data_entrada %>
+      <%= f.text_field :data_entrada, :value => (I18n.l(@movimentacao.data_entrada) if @movimentacao.data_entrada) %>
     </div>
   </div>
   <div class="clearfix">
@@ -74,7 +75,7 @@
   <div class="clearfix">
     <%= f.label :data_relatorio %>
     <div class="input">    
-		<%= f.text_field :data_relatorio %>
+		<%= f.text_field :data_relatorio, :value => (I18n.l(@movimentacao.data_relatorio) if @movimentacao.data_relatorio) %>
     </div>		 
   </div>
 </td><td>
@@ -87,7 +88,7 @@
   <div class="clearfix">
     <%= f.label :data_nota_fiscal %>
     <div class="input">
-    	<%= f.text_field :data_nota_fiscal %>
+    	<%= f.text_field :data_nota_fiscal, :value => (I18n.l(@movimentacao.data_nota_fiscal) if @movimentacao.data_nota_fiscal) %>
     </div>
   </div>
   <div class="clearfix">
@@ -124,9 +125,10 @@
 <% end %>
 <script>
 $(function() {
-  $('#movimentacao_data_movimentacao').datepicker();
-  $('#movimentacao_data_entrada').datepicker();
-  $('#movimentacao_data_relatorio').datepicker();
-  $('#movimentacao_data_nota_fiscal').datepicker();
+  $('#movimentacao_data_movimentacao').datepicker({dateFormat : 'dd/mm/yy'});
+  $('#movimentacao_data_entrada').datepicker({dateFormat : 'dd/mm/yy'});
+  $('#movimentacao_data_relatorio').datepicker({dateFormat : 'dd/mm/yy'});
+  $('#movimentacao_data_nota_fiscal').datepicker({dateFormat : 'dd/mm/yy'});
+
 });
 </script>

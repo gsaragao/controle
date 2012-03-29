@@ -4,7 +4,7 @@ class MovimentacoesController < ApplicationController
   respond_to :html
 
   def index
-    @movimentacoes = Movimentacao.all
+    @movimentacoes = Movimentacao.find_ativo.page params[:page]
     respond_with @movimentacoes
   end
 
@@ -16,6 +16,8 @@ class MovimentacoesController < ApplicationController
   def new
     carrega_combos
     @movimentacao = Movimentacao.new
+    @movimentacao.status = Movimentacao::EM_ABERTO
+    @movimentacao.data_movimentacao = Date.today
     respond_with @movimentacao
   end
 
@@ -26,8 +28,8 @@ class MovimentacoesController < ApplicationController
 
   def create
     @movimentacao = Movimentacao.new(params[:movimentacao])
-    @ultimo_mov = Movimentacao.ultima_versao(@movimentacao.nid)
-    @movimentacao = seta_nid_versao(@movimentacao, @ultimo_mov)
+    @ultimo_mov = Movimentacao.ultimo_nid
+    @movimentacao = set_nid_versao_create(@movimentacao, @ultimo_mov)
     
     if @movimentacao.save
       flash[:notice] = t('msg.create_sucess')
@@ -42,19 +44,18 @@ class MovimentacoesController < ApplicationController
   def update
     @movimentacao = Movimentacao.find(params[:id])
     @ultimo_mov = Movimentacao.ultima_versao(@movimentacao.nid)
-    @ultimo_mov2 = Movimentacao.new(@ultimo_mov)
-    @ultimo_mov2.ativo = 'N'
-    @movimentacao = seta_nid_versao(@movimentacao, @ultimo_mov2)
+
+    @movimentacao = set_nid_versao_update(@movimentacao, @ultimo_mov)
+    @movimentacao.attributes = params[:movimentacao]
       Movimentacao.transaction do
-        if @movimentacao.save!(params[:movimentacao]) && @ultimo_mov2.save()
+        if @movimentacao.save! && @ultimo_mov.update_attribute(:ativo, "N")
           flash[:notice] = t('msg.update_sucess')
           redirect_to movimentacoes_path
         else
           carrega_combos
           render :action => :edit
-           raise ActiveRecord::Rollback, "DEU MERDDDDDDDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!"
         end
-     end
+      end
   end
 
   def destroy
@@ -70,22 +71,24 @@ class MovimentacoesController < ApplicationController
     @class_movimentacao = 'active'  
   end
   
-  def seta_nid_versao(movimentacao, ultimo_mov)
+  def set_nid_versao_create(movimentacao, ultimo_mov)
+
+    movimentacao.version = 1
+    movimentacao.ativo = 'S'
     
-    if (movimentacao.id == nil) 
-      movimentacao.version = 1
-      
-      if (ultimo_mov != nil && ultimo_mov.nid > 0)
-        movimentacao.nid =  ultimo_mov.nid + 1
-      else
-        movimentacao.nid = 1
-      end  
-      
+    if (ultimo_mov != nil && ultimo_mov.nid > 0)
+      movimentacao.nid =  ultimo_mov.nid + 1
     else
-      movimentacao.version = movimentacao.version + 1
-    end
-    
+      movimentacao.nid = 1
+    end  
+   
+    movimentacao 
+  end
+  
+  def set_nid_versao_update(movimentacao, ultimo_mov)
+
     movimentacao_nova = movimentacao.dup
+    movimentacao_nova.version += 1
     movimentacao_nova.ativo = 'S'
     movimentacao_nova 
   end

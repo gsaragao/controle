@@ -1,15 +1,16 @@
 <%= form_for(@destino) do |f| %>
-  <% if @destino.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@destino.errors.count, "error") %> prohibited this destino from being saved:</h2>
-
-      <ul>
-      <% @destino.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% if @destino.errors.any? %>
+<fieldset id="erros">
+   <div class="ui-state-error ui-corner-all" style="padding: 5px; width: 50%">
+     <h3><%= t('errors.messages.titulo') %>:</h3>
+     <ul>
+       <% @destino.errors.full_messages.each do |msg| %>
+           <li><%= msg %></li>
+         <% end %>
+     </ul>
+   </div>
+</fieldset>
+<% end %>
 <hr>
   <div class="clearfix">
     <%= f.label :descricao %>

@@ -8,7 +8,7 @@ gem 'rails', '3.1.0'
 gem 'mysql2'
 gem 'foreigner'
 gem 'jquery-rails'
-gem "will_paginate", "~> 3.0.0"
+gem 'kaminari'
 gem "paperclip"
 
 # Gems used only for assets and not required
