@@ -2,9 +2,12 @@
 class MovimentacoesController < ApplicationController
 
   respond_to :html
-
+  before_filter :trata_params, :only => [:index]
+  
   def index
-    @movimentacoes = Movimentacao.find_ativo(params[:page])
+    @tecnicos = Tecnico.all
+    @movimentacao = Movimentacao.new
+    @movimentacoes = Movimentacao.pesquisar(params[:movimentacao],params[:page])
     respond_with @movimentacoes
   end
 
@@ -30,7 +33,7 @@ class MovimentacoesController < ApplicationController
     @movimentacao = Movimentacao.new(params[:movimentacao])
     @ultimo_mov = Movimentacao.ultimo_nid
     @movimentacao = set_nid_versao_create(@movimentacao, @ultimo_mov)
-    
+
     if @movimentacao.save
       flash[:notice] = t('msg.create_sucess')
       redirect_to movimentacoes_path
@@ -48,7 +51,7 @@ class MovimentacoesController < ApplicationController
     @movimentacao = set_nid_versao_update(@movimentacao, @ultimo_mov)
     @movimentacao.attributes = params[:movimentacao]
       Movimentacao.transaction do
-        if @movimentacao.save! && @ultimo_mov.update_attribute(:ativo, "N")
+        if @movimentacao.save! && @ultimo_mov.update_attribute(:ativo, 0)
           flash[:notice] = t('msg.update_sucess')
           redirect_to movimentacoes_path
         else
@@ -74,7 +77,7 @@ class MovimentacoesController < ApplicationController
   def set_nid_versao_create(movimentacao, ultimo_mov)
 
     movimentacao.version = 1
-    movimentacao.ativo = 'S'
+    movimentacao.ativo = 1
     
     if (ultimo_mov != nil && ultimo_mov.nid > 0)
       movimentacao.nid =  ultimo_mov.nid + 1
@@ -89,7 +92,7 @@ class MovimentacoesController < ApplicationController
 
     movimentacao_nova = movimentacao.dup
     movimentacao_nova.version += 1
-    movimentacao_nova.ativo = 'S'
+    movimentacao_nova.ativo = 1
     movimentacao_nova 
   end
   
@@ -98,5 +101,14 @@ class MovimentacoesController < ApplicationController
     @modelos = Modelo.all
     @versoes = Versao.all
   end  
+  
+  def trata_params
+    if (!params[:movimentacao].nil?) 
+       params[:movimentacao][:data_movimentacao] = trata_data(params[:movimentacao][:data_movimentacao])
+       params[:movimentacao][:data_entrada] = trata_data(params[:movimentacao][:data_entrada])
+       params[:movimentacao][:data_relatorio] = trata_data(params[:movimentacao][:data_relatorio])
+       params[:movimentacao].delete_if{|k,v| v.blank?}
+    end
+  end
   
 end

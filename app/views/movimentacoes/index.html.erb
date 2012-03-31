@@ -1,4 +1,29 @@
 <h1><%= t('app.menu.listagem')%>&nbsp;<%= t('app.menu.movimentacao')%></h1>
+<%= form_for(@movimentacao, :html => { :method => :get }, :url => movimentacoes_path) do |f| %>
+<table class="zebra-striped">
+  <tr>
+    <th><%= t('movimentacao.tecnico')%></th>
+    <th><%= t('movimentacao.data_mov')%></th>
+    <th><%= t('movimentacao.data_entrada')%></th>
+    <th><%= t('movimentacao.status')%></th>
+    <th><%= t('movimentacao.data_relatorio')%></th>
+	<th><%= t('movimentacao.ativo')%></th>
+    <th></th>
+  </tr>
+  <tr class="pesquisa">
+    <th><%= f.select :tecnico_id, options_from_collection_for_select(@tecnicos,:id,:nome, @movimentacao.tecnico_id),  
+			:include_blank => true %></th>
+    <th><%= f.text_field :data_movimentacao, :value => (I18n.l(@movimentacao.data_movimentacao) if @movimentacao.data_movimentacao) %></th>
+    <th><%= f.text_field :data_entrada, :value => (I18n.l(@movimentacao.data_entrada) if @movimentacao.data_entrada) %></th>
+    <th><%= f.select :status, options_for_select(@movimentacao.lista_status, @movimentacao.status) ,  
+         :include_blank => true %></th>
+    <th><%= f.text_field :data_relatorio, :value => (I18n.l(@movimentacao.data_relatorio) if @movimentacao.data_relatorio) %></th>
+	<th><%= f.select :ativo, options_for_select(@movimentacao.lista_ativos, @movimentacao.ativo),{}, :class => "checkAtivo" %></th>
+	<th><%= f.submit t('botao.pesquisar'), :class => "btn primary" %></th>
+  </tr>
+
+</table>
+<% end %>
 
 <% if @movimentacoes.size > 0  %>
  <table class="zebra-striped">
@@ -30,11 +55,18 @@
   </tr>
  <% end %>
  </table>
+	<div class="apple_pagination">
+	    <%= will_paginate @movimentacoes, :container => false, :next_label => 'Próximo', :previous_label => 'Anterior' %>
+	</div>
 <% end %>
 
-<div class="apple_pagination">
-    <%= will_paginate @movimentacoes, :container => false, :next_label => 'Próximo', :previous_label => 'Anterior' %>
-  </div>
 <br />
 
 <a href="<%= new_movimentacao_path %>"><button class="btn" name="btnpesquisa"><%= t('movimentacao.acao.novo')%></button></a>
+<script>
+$(function() {
+  $('#movimentacao_data_movimentacao').datepicker({dateFormat : 'dd/mm/yy'});
+  $('#movimentacao_data_entrada').datepicker({dateFormat : 'dd/mm/yy'});
+  $('#movimentacao_data_relatorio').datepicker({dateFormat : 'dd/mm/yy'});
+});
+</script>

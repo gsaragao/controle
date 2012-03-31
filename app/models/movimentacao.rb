@@ -1,15 +1,18 @@
+# encoding: UTF-8
 class Movimentacao < ActiveRecord::Base
   belongs_to :tecnico
   belongs_to :versao
   belongs_to :modelo
   has_attached_file :termo
   validates_presence_of :patrimonio, :tecnico_id, :data_entrada
-  self.per_page = 10
-  attr_accessor :lista_status
+  self.per_page = 5
+  attr_accessor :lista_status, :lista_ativos
   after_initialize :default_values  
   
   def default_values
+      self.ativo = 1
       self.lista_status = {"Em Aberto" => 1, "Fechado" => 2, "Devolvido"  => 3, "Quebrado" => 4}
+      self.lista_ativos = {"Todos" => "", "Sim" => 1, "Não"  => 0}
   end
   
   EM_ABERTO = 1
@@ -73,8 +76,8 @@ class Movimentacao < ActiveRecord::Base
       where("nid = ? and version = ?", nid, @versao).first
    end    
    
-   def self.find_ativo(page)
-      where(:ativo => "S").paginate(:page => page)
+   def self.pesquisar(mov, page)
+      where(mov).paginate(:page => page).order("id desc")
    end
    
 end

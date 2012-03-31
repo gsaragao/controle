@@ -2,47 +2,47 @@
 <table>
 	<tr><td>
 	<p>
-	  <b>Tecnico:</b>
+	  <b><%= t('movimentacao.tecnico')%>:</b>
 	  <%= @movimentacao.tecnico.nome if @movimentacao.tecnico %>
 	</p>
 
 	<p>
-	  <b>Data movimentacao:</b>
+	  <b><%= t('movimentacao.data_movimentacao')%>:</b>
 	  <%= @movimentacao.data_movimentacao %>
 	</p>
 
 	<p>
-	  <b>Serie:</b>
+	  <b><%= t('movimentacao.serie')%>:</b>
 	  <%= @movimentacao.serie %>
 	</p>
 
 	<p>
-	  <b>Patrimonio:</b>
+	  <b><%= t('movimentacao.patrimonio')%>:</b>
 	  <%= @movimentacao.patrimonio %>
 	</p>
 
 	<p>
-	  <b>Versao:</b>
+	  <b><%= t('movimentacao.versao')%>:</b>
 	  <%= @movimentacao.versao.descricao if @movimentacao.versao %>
 	</p>
 
 	<p>
-	  <b>Modelo:</b>
+	  <b><%= t('movimentacao.modelo')%>:</b>
 	  <%= @movimentacao.modelo.descricao if @movimentacao.modelo %>
 	</p>
 
 	<p>
-	  <b>Data entrada:</b>
+	  <b><%= t('movimentacao.entrada')%>:</b>
 	  <%= @movimentacao.data_entrada %>
 	</p>
 
 	<p>
-	  <b>Status:</b>
+	  <b><%= t('movimentacao.status')%>:</b>
 	  <%= @movimentacao.lista_status.key(@movimentacao.status) if @movimentacao.status %>
 	</p>
 
 	<p>
-	  <b>Ordem servico:</b>
+	  <b><%= t('movimentacao.ordem_servico')%>:</b>
 	  <%= @movimentacao.ordem_servico %>
 	</p>
 	
@@ -50,41 +50,41 @@
    <td>
 		
 	<p>
-	  <b>Data relatorio:</b>
+	  <b><%= t('movimentacao.data_relatorio')%>:</b>
 	  <%= @movimentacao.data_relatorio %>
 	</p>
 
 	<p>
-	  <b>Codigo fiscal:</b>
+	  <b><%= t('movimentacao.codigo_fiscal')%>:</b>
 	  <%= @movimentacao.codigo_fiscal %>
 	</p>
 
 	<p>
-	  <b>Data nota fiscal:</b>
+	  <b><%= t('movimentacao.data_nota_fiscal')%>:</b>
 	  <%= @movimentacao.data_nota_fiscal %>
 	</p>
 
 	<p>
-	  <b>Nota fiscal:</b>
+	  <b><%= t('movimentacao.nota_fiscal')%>:</b>
 	  <%= @movimentacao.nota_fiscal %>
 	</p>
 
 	<p>
-	  <b>Nfe:</b>
+	  <b><%= t('movimentacao.nfe')%>:</b>
 	  <%= @movimentacao.nfe %>
 	</p>
 
 	<p>
-	  <b>Observacao:</b>
+	  <b><%= t('movimentacao.observacao')%>:</b>
 	  <%= @movimentacao.observacao %>
 	</p>
 	<p>
-	  <b>Retirado:</b>
+	  <b><%= t('movimentacao.retirado')%>:</b>
 	  <%= @movimentacao.retirado %>
 	</p>
 	
 	<p>
-	  <b>Termo:</b>
+	  <b><%= t('movimentacao.termo')%>:</b>
 	  <%= link_to "#{@movimentacao.termo_file_name}", @movimentacao.termo.url, :target => "_blank" %>
 	</p>
 	
