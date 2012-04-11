@@ -20,6 +20,10 @@
 	  </tr>
 	<% end %>
 	</table>
+	<div class="apple_pagination">
+	    <%= will_paginate @tecnicos, :container => false, :next_label => 'Próximo', :previous_label => 'Anterior' %>
+	</div>
+	
 <% end %>
 <br />
 <a href="<%= new_tecnico_path %>"><button class="btn" name="btnpesquisa"><%= t('tecnico.acao.novo')%></button></a>

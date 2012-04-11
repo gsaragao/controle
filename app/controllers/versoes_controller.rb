@@ -5,7 +5,7 @@ class VersoesController < ApplicationController
   before_filter :setar_classe_menu
 
   def index
-    @versoes = Versao.all
+    @versoes = Versao.pesquisar(params[:versao],params[:page])
     respond_with @versoes
   end
 

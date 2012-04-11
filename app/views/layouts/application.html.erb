@@ -15,6 +15,7 @@
           <ul class="nav">
             <li class='<%=@class_home %>' ><a href="/home"><%= t("app.menu.home") %></a></li>
             <li class='<%=@class_movimentacao %>' ><a href="/movimentacoes"><%= t("app.menu.movimentacao") %></a></li>
+            <li class='<%=@class_retirada %>' ><a href="/retiradas"><%= t("app.menu.retirada") %></a></li>
             <li class='<%=@class_tecnico %>' ><a href="/tecnicos"><%= t("app.menu.tecnico") %></a></li>
             <li class='<%=@class_modelo %>' ><a href="/modelos"><%= t("app.menu.modelo") %></a></li>
             <li class='<%=@class_versao %>' ><a href="/versoes"><%= t("app.menu.versao") %></a></li>
@@ -29,7 +30,7 @@
 		<div class="page-header">
 		 </div>
      	<div class="row">
-		   <div class="span16">
+		   <div>
 			<% if notice.present? %>
 			    <script>showNotification(true,'<%= notice %>');</script>
 			<% end %>	

@@ -5,7 +5,7 @@ class TecnicosController < ApplicationController
   before_filter :setar_classe_menu
 
   def index
-    @tecnicos = Tecnico.all
+    @tecnicos = Tecnico.pesquisar(params[:tecnico],params[:page])
     respond_with @tecnicos
   end
 
@@ -44,7 +44,7 @@ class TecnicosController < ApplicationController
     else
       render :action => :edit
     end
-end
+  end
 
   def destroy
     @tecnico = Tecnico.find(params[:id])

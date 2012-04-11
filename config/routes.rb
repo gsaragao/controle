@@ -1,4 +1,6 @@
 Controle::Application.routes.draw do
+  resources :retiradas
+
   resources :movimentacoes
 
   resources :destinos

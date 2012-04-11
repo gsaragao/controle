@@ -3,6 +3,7 @@
 <fieldset id="erros">
    <div class="ui-state-error ui-corner-all" style="padding: 5px; width: 50%">
      <h3><%= t('errors.messages.titulo') %>:</h3>
+     <br>
      <ul>
        <% @movimentacao.errors.full_messages.each do |msg| %>
            <li><%= msg %></li>
@@ -11,6 +12,7 @@
    </div>
 </fieldset>
 <% end %>
+<%= f.hidden_field :acao %>
 <table>
   <tr><td>	 
   <div class="clearfix">
@@ -21,7 +23,7 @@
     </div>
   </div>
   <div class="clearfix">
-    <%= f.label :data_movimentacao %>
+    <%= f.label :data_mov %>
     <div class="input">
     <%= f.text_field :data_movimentacao, :value => (I18n.l(@movimentacao.data_movimentacao) if @movimentacao.data_movimentacao) %>	
     </div>
@@ -53,7 +55,7 @@
     </div>
   </div>
   <div class="clearfix">
-    <%= f.label :data_entrada %>
+    <%= f.label :entrada %>
     <div class="input">
       <%= f.text_field :data_entrada, :value => (I18n.l(@movimentacao.data_entrada) if @movimentacao.data_entrada) %>
     </div>

@@ -8,6 +8,7 @@ class HomeController < ApplicationController
     @versoes = Versao.all
     @tecnicos = Tecnico.all
     @movimentacoes = Movimentacao.all
+    @retiradas = Retirada.all
   end  
   
   private

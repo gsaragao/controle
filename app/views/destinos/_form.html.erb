@@ -3,6 +3,7 @@
 <fieldset id="erros">
    <div class="ui-state-error ui-corner-all" style="padding: 5px; width: 50%">
      <h3><%= t('errors.messages.titulo') %>:</h3>
+     <br>
      <ul>
        <% @destino.errors.full_messages.each do |msg| %>
            <li><%= msg %></li>

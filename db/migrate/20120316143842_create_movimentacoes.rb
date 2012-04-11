@@ -3,7 +3,7 @@ class CreateMovimentacoes < ActiveRecord::Migration
     create_table :movimentacoes do |t|
       t.integer :nid
       t.integer :version
-      t.string :ativo, :default => 1
+      t.integer :ativo
       t.references :tecnico
       t.date :data_movimentacao
       t.string :serie

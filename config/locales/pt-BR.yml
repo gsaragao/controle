@@ -27,24 +27,50 @@
     descricao: Descrição
     tecnico: Técnico 
     data_movimentacao: Data Movimentação
-    data_mov: Data Mov. 
+    data_mov: Dt. Movim. 
     serie: Série 
     patrimonio: Patrimônio 
     versao: Versão 
     modelo: Modelo
-    data_entrada: Entrada 
+    data_entrada: Dt. Entrada 
     status: Status 
     ordem_servico: Ordem Serviço 
     os: OS
-    data_relatorio: Relatório 
+    data_relatorio: Dt. Relatório 
     codigo_fiscal: Código Fiscal 
-    data_nota_fiscal: Data Nota Fiscal 
+    data_nota_fiscal: Dt. Nota Fiscal 
     nota_fiscal: Nota Fiscal 
     nfe: NFE 
     observacao: Observação 
     termo_valida:
       tamanho: "Arquivo deve ter no máximo: 2 MB"
       tipo: "São permitidos apenas os arquivos do tipo html, texto, planilhas e apresentações"
+
+  retirada:
+    self: Retirada
+    acao: 
+      novo: Nova Retirada
+      editar: Editar Retirada
+      listar: Listar Retirada
+      detalhar: Detalhes Retirada
+    descricao: Descrição
+    tecnico: Técnico 
+    data_movimentacao: Data Retirada
+    data_mov: Dt. Movim. 
+    serie: Série 
+    patrimonio: Patrimônio 
+    versao: Versão 
+    modelo: Modelo
+    data_entrada: Dt. Entrada 
+    status: Status 
+    ordem_servico: Ordem Serviço 
+    os: OS
+    data_relatorio: Dt. Relatório 
+    codigo_fiscal: Código Fiscal 
+    data_instalacao: Dt. Instalação 
+    nota_fiscal: Nota Fiscal 
+    nfe_referencia: NFE Referência 
+    observacao: Observação 
   
   destino:
     self: Destino
@@ -92,6 +118,7 @@
     detalhes: Detalhes
     cancelar: Cancelar
     voltar: Voltar
+    movimentar: Movimentar
   
   # Mensagens
   msg:
@@ -354,27 +381,42 @@
         descricao: Descrição
         
       movimentacao:
-        self: Movimentação
-        acao: 
-          novo: Nova Movimentação
-          editar: Editar Movimentação
-          listar: Listar Movimentação
-          detalhar: Detalhes Movimentação
         descricao: Descrição
         tecnico: Técnico 
-        data_movimentacao: Data Mov.
-        data_mov: Data Mov. 
+        data_movimentacao: Data Movimentação
+        data_mov: Data Movim. 
         serie: Série 
         patrimonio: Patrimônio 
         versao: Versão 
         modelo: Modelo
-        data_entrada: Entrada 
+        data_entrada: Data Entrada 
         status: Status 
         ordem_servico: Ordem Serviço 
         os: OS
-        data_relatorio: Relatório 
+        data_relatorio: Data Relatório 
         codigo_fiscal: Código Fiscal 
-        data_nota_fiscal: Data Nota Fiscal 
+        data_nota_fiscal: Dt. Nota Fiscal 
         nota_fiscal: Nota Fiscal 
         nfe: NFE 
-        observacao: Observação  
+        observacao: Observação 
+      
+      retirada:
+        descricao: Descrição
+        tecnico: Técnico 
+        data_movimentacao: Data Retirada
+        data_mov: Dt. Movim. 
+        serie: Série 
+        patrimonio: Patrimônio 
+        versao: Versão 
+        modelo: Modelo
+        data_entrada: Dt. Entrada 
+        status: Status 
+        ordem_servico: Ordem Serviço 
+        os: OS
+        data_relatorio: Dt. Relatório 
+        codigo_fiscal: Código Fiscal 
+        data_instalacao: Data Instalação
+        movimentacao: Movimentação
+        nfe_referencia: NFE Referência 
+        observacao: Observação 
+      

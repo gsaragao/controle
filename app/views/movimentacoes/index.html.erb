@@ -1,5 +1,6 @@
 <h1><%= t('app.menu.listagem')%>&nbsp;<%= t('app.menu.movimentacao')%></h1>
 <%= form_for(@movimentacao, :html => { :method => :get }, :url => movimentacoes_path) do |f| %>
+
 <table class="zebra-striped">
   <tr>
     <th><%= t('movimentacao.tecnico')%></th>
@@ -15,8 +16,7 @@
 			:include_blank => true %></th>
     <th><%= f.text_field :data_movimentacao, :value => (I18n.l(@movimentacao.data_movimentacao) if @movimentacao.data_movimentacao) %></th>
     <th><%= f.text_field :data_entrada, :value => (I18n.l(@movimentacao.data_entrada) if @movimentacao.data_entrada) %></th>
-    <th><%= f.select :status, options_for_select(@movimentacao.lista_status, @movimentacao.status) ,  
-         :include_blank => true %></th>
+    <th><%= f.select :status, options_for_select(@movimentacao.lista_status, @movimentacao.status) , :include_blank => true %></th>
     <th><%= f.text_field :data_relatorio, :value => (I18n.l(@movimentacao.data_relatorio) if @movimentacao.data_relatorio) %></th>
 	<th><%= f.select :ativo, options_for_select(@movimentacao.lista_ativos, @movimentacao.ativo),{}, :class => "checkAtivo" %></th>
 	<th><%= f.submit t('botao.pesquisar'), :class => "btn primary" %></th>
@@ -31,26 +31,28 @@
     <th width="20%"><%= t('movimentacao.tecnico')%></th>
     <th width="10%"><%= t('movimentacao.data_mov')%></th>
     <th width="10%"><%= t('movimentacao.serie')%></th>
+    <th width="10%"><%= t('movimentacao.patrimonio')%></th>
     <th width="10%"><%= t('movimentacao.data_entrada')%></th>
     <th width="10%"><%= t('movimentacao.status')%></th>
-    <th width="10%"><%= t('movimentacao.os')%></th>
     <th width="10%"><%= t('movimentacao.data_relatorio')%></th>
     <th></th>
+	<th></th>
     <th></th>
     <th></th>
   </tr>
 
  <% @movimentacoes.each do |movimentacao| %>
-  <tr>
-    <td><%= movimentacao.tecnico.nome %></td>
+  <tr onclick="movimentar('<%= movimentacao.id %>')" style="cursor: pointer;">
+    <td><%= movimentacao.tecnico.nome if movimentacao.tecnico %></td>
 	<td><%= I18n.l(movimentacao.data_movimentacao) if movimentacao.data_movimentacao %></td>
     <td><%= movimentacao.serie %></td>
+    <td><%= movimentacao.patrimonio %></td>
     <td><%= I18n.l(movimentacao.data_entrada) if movimentacao.data_entrada %></td>
     <td><%= movimentacao.lista_status.key(movimentacao.status) if movimentacao.status %></td>
-    <td><%= movimentacao.ordem_servico %></td>
     <td><%= I18n.l(movimentacao.data_relatorio) if movimentacao.data_relatorio %></td>
     <td><%= link_to t('botao.detalhes'), movimentacao %></td>
-    <td><%= link_to t('botao.editar'), edit_movimentacao_path(movimentacao) %></td>
+	<td><%= link_to t('botao.movimentar'), edit_movimentacao_path(movimentacao, :acao => Movimentacao::ACAO_MOVIMENTACAO) %></td>    
+    <td><%= link_to t('botao.editar'), edit_movimentacao_path(movimentacao, :acao => Movimentacao::ACAO_UPDATE) %></td>
     <td><%= link_to t('botao.excluir'), movimentacao, confirm: 'Tem certeza que deseja excluir este registro?', method: :delete %></td>
   </tr>
  <% end %>
@@ -64,6 +66,11 @@
 
 <a href="<%= new_movimentacao_path %>"><button class="btn" name="btnpesquisa"><%= t('movimentacao.acao.novo')%></button></a>
 <script>
+
+ function movimentar(id) {
+   	window.location = "/movimentacoes/" + id + "/edit?acao=" + <%= Movimentacao::ACAO_MOVIMENTACAO %>
+ }
+
 $(function() {
   $('#movimentacao_data_movimentacao').datepicker({dateFormat : 'dd/mm/yy'});
   $('#movimentacao_data_entrada').datepicker({dateFormat : 'dd/mm/yy'});

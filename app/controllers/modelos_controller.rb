@@ -5,7 +5,7 @@ class ModelosController < ApplicationController
   before_filter :setar_classe_menu
 
   def index
-    @modelos = Modelo.all
+    @modelos = Modelo.pesquisar(params[:modelo],params[:page])
     respond_with @modelos
   end
 

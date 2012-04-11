@@ -8,6 +8,7 @@ ActiveSupport::Inflector.inflections do |inflect|
  inflect.singular /^([a-zA-z]*)ais$/i, '\1al'
  inflect.irregular 'versao', 'versoes'
  inflect.irregular 'movimentacao', 'movimentacoes'
+ inflect.irregular 'devolucao', 'devolucoes'
 #   inflect.singular /^(ox)en/i, '\1'
 #   inflect.irregular 'person', 'people'
 #   inflect.uncountable %w( fish sheep )

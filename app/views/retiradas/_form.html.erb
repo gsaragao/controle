@@ -1,0 +1,113 @@
+<%= form_for(@retirada) do |f| %>
+<% if @retirada.errors.any? %>
+	<fieldset id="erros">
+	   <div class="ui-state-error ui-corner-all" style="padding: 5px; width: 50%">
+	     <h3><%= t('errors.messages.titulo') %>:</h3>
+	     <br>
+	     <ul>
+	       <% @retirada.errors.full_messages.each do |msg| %>
+	           <li><%= msg %></li>
+	         <% end %>
+	     </ul>
+	   </div>
+	</fieldset>
+<% end %>
+<table>
+  <tr><td>
+  <div class="clearfix">
+    <%= f.label :nfe_saida %>
+     <div class="input">
+     	<%= f.text_field :nfe_saida %>
+     </div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :data_retirada %>
+    <div class="input">
+ 		<%= f.text_field :data_retirada, :value => (I18n.l(@retirada.data_retirada) if @retirada.data_retirada) %>
+    </div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :os_saida %>
+    <div class="input">
+		<%= f.text_field :os_saida %>
+	</div>	
+  </div>
+  <div class="clearfix">
+    <%= f.label :nfe_referencia %>
+    <div class="input">
+ 		<%= f.text_field :nfe_referencia %>
+  	</div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :serie %>
+    <div class="input">
+ 		<%= f.text_field :serie %>
+	</div>	
+  </div>
+  <div class="clearfix">
+    <%= f.label :patrimonio %>
+    <div class="input">
+		<%= f.text_field :patrimonio %>
+	</div>	
+  </div>
+  <div class="clearfix">
+    <%= f.label :versao %>
+    <div class="input">
+  		<%= f.select :versao_id, options_from_collection_for_select(@versoes,:id,:descricao, @retirada.versao_id),  
+		:include_blank => true %>
+	</div>	
+  </div>
+  <div class="clearfix">
+    <%= f.label :modelo %>
+    <div class="input">
+ 		<%= f.select :modelo_id, options_from_collection_for_select(@modelos,:id,:descricao, @retirada.modelo_id),  
+		:include_blank => true %>
+	</div>	
+  </div>
+  <div class="clearfix">
+    <%= f.label :tecnico %>
+    <div class="input">
+ 		<%= f.select :tecnico_id, options_from_collection_for_select(@tecnicos,:id,:nome, @retirada.tecnico_id),  
+		:include_blank => true %>
+	</div>	
+  </td><td>
+  </div>
+  <div class="clearfix">
+    <%= f.label :data_instalacao %>
+    <div class="input">
+ 		<%= f.text_field :data_instalacao, :value => (I18n.l(@retirada.data_instalacao) if @retirada.data_instalacao) %>
+   </div> 
+   </div>
+  <div class="clearfix">
+    <%= f.label :ordem_servico %>
+    <div class="input">
+ 		<%= f.text_field :ordem_servico %>
+  	</div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :observacao %>
+    <div class="input">
+		<%= f.text_area :observacao, {:cols => 50, :rows => 10} %>
+	</div>	
+  </div>
+  <!--div class="clearfix">
+    <%= f.label :movimentacao %>
+    <div class="input">
+		<%= f.text_field :movimentacao %>
+	</div>	
+  </div-->
+</td>
+</tr>
+</table>
+  <div class="actions">
+	<%= f.submit t('botao.salvar'), :class => "btn primary" %>
+    <a href="<%= retiradas_path %>"><button class="btn" name="btnback"><%= t('botao.cancelar')%></button></a>
+  </div>
+<% end %>
+<script>
+$(function() {
+  $('#retirada_data_retirada').datepicker({dateFormat : 'dd/mm/yy'});
+  $('#retirada_data_instalacao').datepicker({dateFormat : 'dd/mm/yy'});
+
+});
+</script>

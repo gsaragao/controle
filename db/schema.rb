@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120316143842) do
+ActiveRecord::Schema.define(:version => 20120411213517) do
 
   create_table "destinos", :force => true do |t|
     t.string   "descricao"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20120316143842) do
   create_table "movimentacoes", :force => true do |t|
     t.integer  "nid"
     t.integer  "version"
-    t.integer   "ativo",  :default => 1
+    t.integer  "ativo"
     t.integer  "tecnico_id"
     t.date     "data_movimentacao"
     t.string   "serie"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20120316143842) do
     t.integer  "versao_id"
     t.integer  "modelo_id"
     t.date     "data_entrada"
-    t.integer   "status"
+    t.integer  "status"
     t.string   "ordem_servico"
     t.date     "data_relatorio"
     t.string   "codigo_fiscal"
@@ -57,6 +57,29 @@ ActiveRecord::Schema.define(:version => 20120316143842) do
   add_index "movimentacoes", ["tecnico_id"], :name => "index_movimentacoes_on_tecnico_id"
   add_index "movimentacoes", ["versao_id"], :name => "index_movimentacoes_on_versao_id"
 
+  create_table "retiradas", :force => true do |t|
+    t.string   "nfe_saida"
+    t.date     "data_retirada"
+    t.string   "os_saida"
+    t.string   "nfe_referencia"
+    t.string   "serie"
+    t.string   "patrimonio"
+    t.integer  "versao_id"
+    t.integer  "modelo_id"
+    t.integer  "tecnico_id"
+    t.date     "data_instalacao"
+    t.string   "ordem_servico"
+    t.text     "observacao"
+    t.integer  "movimentacao_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "retiradas", ["modelo_id"], :name => "index_retiradas_on_modelo_id"
+  add_index "retiradas", ["movimentacao_id"], :name => "index_retiradas_on_movimentacao_id"
+  add_index "retiradas", ["tecnico_id"], :name => "index_retiradas_on_tecnico_id"
+  add_index "retiradas", ["versao_id"], :name => "index_retiradas_on_versao_id"
+
   create_table "tecnicos", :force => true do |t|
     t.string   "nome"
     t.string   "cpf"
@@ -69,5 +92,14 @@ ActiveRecord::Schema.define(:version => 20120316143842) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_foreign_key "movimentacoes", "modelos", :name => "movimentacoes_modelo_id_fk"
+  add_foreign_key "movimentacoes", "tecnicos", :name => "movimentacoes_tecnico_id_fk"
+  add_foreign_key "movimentacoes", "versoes", :name => "movimentacoes_versao_id_fk"
+
+  add_foreign_key "retiradas", "modelos", :name => "retiradas_modelo_id_fk"
+  add_foreign_key "retiradas", "movimentacoes", :name => "retiradas_movimentacao_id_fk"
+  add_foreign_key "retiradas", "tecnicos", :name => "retiradas_tecnico_id_fk"
+  add_foreign_key "retiradas", "versoes", :name => "retiradas_versao_id_fk"
 
 end

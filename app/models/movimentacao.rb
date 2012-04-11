@@ -6,19 +6,20 @@ class Movimentacao < ActiveRecord::Base
   has_attached_file :termo
   validates_presence_of :patrimonio, :tecnico_id, :data_entrada
   self.per_page = 5
-  attr_accessor :lista_status, :lista_ativos
+  attr_accessor :lista_status, :lista_ativos, :acao
   after_initialize :default_values  
   
   def default_values
-      self.ativo = 1
-      self.lista_status = {"Em Aberto" => 1, "Fechado" => 2, "Devolvido"  => 3, "Quebrado" => 4}
+      self.lista_status = {"Good" => 1, "Instalado" => 2, "Bad"  => 3, "Stolen" => 4}
       self.lista_ativos = {"Todos" => "", "Sim" => 1, "Não"  => 0}
   end
   
-  EM_ABERTO = 1
-  FECHADO = 2
-  DEVOLVIDO = 3
-  QUEBRADO = 4
+  ACAO_UPDATE = '0'
+  ACAO_MOVIMENTACAO = '1'
+  GOOD = 1
+  INSTALADO = 2
+  BAD = 3
+  STOLEN = 4
   
   validates_attachment_content_type :termo, 
                                     :content_type => ['image/jpg',

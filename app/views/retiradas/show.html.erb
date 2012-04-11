@@ -1,0 +1,75 @@
+<h1><%= t("retirada.acao.detalhar") %></h1>
+<table>
+	<tr><td>
+		<p>
+		  <b> <%= t('retirada.nfe_saida') %>:</b>
+		  <%= @retirada.nfe_saida %>
+		</p>
+
+		<p>
+		  <b> <%= t('retirada.data_retirada') %>:</b>
+		  <%= @retirada.data_retirada %>
+		</p>
+
+		<p>
+		  <b> <%= t('retirada.os_saida') %>:</b>
+		  <%= @retirada.os_saida %>
+		</p>
+
+		<p>
+		  <b><%= t('retirada.nfe_referencia') %>:</b>
+		  <%= @retirada.nfe_referencia %>
+		</p>
+
+		<p>
+		  <b> <%= t('retirada.serie') %>:</b>
+		  <%= @retirada.serie %>
+		</p>
+
+		<p>
+		  <b> <%= t('retirada.patrimonio') %>:</b>
+		  <%= @retirada.patrimonio %>
+		</p>
+
+		<p>
+		  <b> <%= t('retirada.versao') %>:</b>
+		  <%= @retirada.versao.descricao if @retirada.versao %>
+		</p>
+         </td><td>
+		<p>
+		  <b> <%= t('retirada.modelo') %>:</b>
+		  <%= @retirada.modelo.descricao if @retirada.modelo %>
+		</p>
+
+		<p>
+		  <b> <%= t('retirada.tecnico') %>:</b>
+		  <%= @retirada.tecnico.nome if @retirada.tecnico %>
+		</p>
+
+		<p>
+		  <b> <%= t('retirada.data_instalacao') %>:</b>
+		  <%= @retirada.data_instalacao %>
+		</p>
+
+		<p>
+		  <b> <%= t('retirada.ordem_servico') %>:</b>
+		  <%= @retirada.ordem_servico %>
+		</p>
+
+		<p>
+		  <b> <%= t('retirada.observacao') %>:</b>
+		  <%= @retirada.observacao %>
+		</p>
+
+		<p>
+		  <b>Movimentacao:</b>
+		  <%= @retirada.movimentacao %>
+		</p>
+
+		</td>
+	  </tr>
+	</table>
+	<div class="actionsShow">
+		<a href="<%= edit_retirada_path %>"><button class="btn primary" name="btnback"><%= t('botao.editar')%></button></a>&nbsp; 
+		<a href="<%= retiradas_path %>"><button class="btn" name="btnback"><%= t('botao.voltar')%></button></a>
+	</div>

@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  nfe_saida: MyString
+  data_retirada: 2012-04-11
+  os_saida: MyString
+  nfe_referencia: MyString
+  serie: MyString
+  patrimonio: MyString
+  versao: 
+  modelo: 
+  tecnico: 
+  data_instalacao: 2012-04-11
+  ordem_servico: MyString
+  observacao: MyText
+  movimentacao: 
+
+two:
+  nfe_saida: MyString
+  data_retirada: 2012-04-11
+  os_saida: MyString
+  nfe_referencia: MyString
+  serie: MyString
+  patrimonio: MyString
+  versao: 
+  modelo: 
+  tecnico: 
+  data_instalacao: 2012-04-11
+  ordem_servico: MyString
+  observacao: MyText
+  movimentacao: 

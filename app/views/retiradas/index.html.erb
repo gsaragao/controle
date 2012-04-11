@@ -1,0 +1,68 @@
+<h1><%= t('app.menu.listagem')%>&nbsp;<%= t('app.menu.retirada')%></h1>
+<%= form_for(@retirada, :html => { :method => :get }, :url => retiradas_path) do |f| %>
+
+	<table class="zebra-striped">
+	  <tr>
+	    <th><%= t('retirada.tecnico')%></th>
+	    <th><%= t('retirada.data_retirada')%></th>
+	    <th><%= t('retirada.nfe_saida')%></th>
+	    <th><%= t('retirada.os_saida')%></th>
+	    <th><%= t('retirada.serie')%></th>
+	    <th></th>
+	  </tr>
+	  <tr class="pesquisa">
+	    <th><%= f.select :tecnico_id, options_from_collection_for_select(@tecnicos,:id,:nome, @retirada.tecnico_id),  
+				:include_blank => true %></th>
+	    <th><%= f.text_field :data_retirada, :value => (I18n.l(@retirada.data_retirada) if @retirada.data_retirada) %></th>
+	    <th><%= f.text_field :nfe_saida, :value => (@retirada.nfe_saida if @retirada.nfe_saida) %></th>
+	    <th><%= f.text_field :os_saida, :value => (@retirada.os_saida if @retirada.os_saida) %></th>
+	    <th><%= f.text_field :serie, :value => (@retirada.serie if @retirada.serie) %></th>
+		<th><%= f.submit t('botao.pesquisar'), :class => "btn primary" %></th>
+	  </tr>
+	</table>
+<% end %>
+
+	<% if @retiradas.size > 0  %>
+	 <table class="zebra-striped">
+	  <tr>
+	    <th width="20%"><%= t('retirada.tecnico')%></th>
+	    <th width="10%"><%= t('retirada.data_retirada')%></th>
+	    <th width="10%"><%= t('retirada.serie')%></th>
+	    <th width="10%"><%= t('retirada.patrimonio')%></th>
+	    <th width="10%"><%= t('retirada.os_saida')%></th>
+	    <th width="10%"><%= t('retirada.nfe_saida')%></th>
+	    <th width="10%"><%= t('retirada.nfe_referencia')%></th>
+	 	<th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+
+	<% @retiradas.each do |retirada| %>
+	  <tr>
+	    <td><%= retirada.tecnico.nome if retirada.tecnico %></td>
+	    <td><%= I18n.l(retirada.data_retirada) if retirada.data_retirada %></td>
+	    <td><%= retirada.serie %></td>
+	    <td><%= retirada.patrimonio %></td>
+	    <td><%= retirada.os_saida %></td>
+	    <td><%= retirada.nfe_saida %></td>
+		<td><%= retirada.nfe_referencia %></td>
+	    <td><%= link_to t('botao.detalhes'), retirada %></td>
+	    <td><%= link_to t('botao.editar'), edit_retirada_path(retirada) %></td>
+	    <td><%= link_to t('botao.excluir'), retirada, confirm: 'Tem certeza que deseja excluir este registro?', method: :delete %></td>
+	  </tr>
+	 <% end %>
+ </table>
+	<div class="apple_pagination">
+	    <%= will_paginate @retiradas, :container => false, :next_label => 'Próximo', :previous_label => 'Anterior' %>
+	</div>
+<% end %>
+
+<br />
+
+<a href="<%= new_retirada_path %>"><button class="btn" name="btnpesquisa"><%= t('retirada.acao.novo')%></button></a>
+<script>
+
+$(function() {
+  $('#retirada_data_retirada').datepicker({dateFormat : 'dd/mm/yy'});
+});
+</script>
