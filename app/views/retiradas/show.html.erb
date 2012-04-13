@@ -55,15 +55,15 @@
 		  <b> <%= t('retirada.ordem_servico') %>:</b>
 		  <%= @retirada.ordem_servico %>
 		</p>
+		
+		<p>
+		  <b> <%= t('retirada.operacao') %>:</b>
+		  <%= ext_int(@retirada.operacao) %>
+		</p>
 
 		<p>
 		  <b> <%= t('retirada.observacao') %>:</b>
 		  <%= @retirada.observacao %>
-		</p>
-
-		<p>
-		  <b>Movimentacao:</b>
-		  <%= @retirada.movimentacao %>
 		</p>
 
 		</td>

@@ -64,13 +64,18 @@
     data_entrada: Dt. Entrada 
     status: Status 
     ordem_servico: Ordem Serviço 
-    os: OS
+    os_saida: OS Saída
     data_relatorio: Dt. Relatório 
     codigo_fiscal: Código Fiscal 
     data_instalacao: Dt. Instalação 
     nota_fiscal: Nota Fiscal 
     nfe_referencia: NFE Referência 
+    nfe_saida: NFE Saída
     observacao: Observação 
+    operacao: Operação
+    interna: Interna
+    externa: Externa
+    erro_operacao: 'Não foi encontrado nas movimentações nenhum registro correspondente!'
   
   destino:
     self: Destino
@@ -403,8 +408,7 @@
       retirada:
         descricao: Descrição
         tecnico: Técnico 
-        data_movimentacao: Data Retirada
-        data_mov: Dt. Movim. 
+        data_retirada: Data Retirada
         serie: Série 
         patrimonio: Patrimônio 
         versao: Versão 
@@ -412,11 +416,13 @@
         data_entrada: Dt. Entrada 
         status: Status 
         ordem_servico: Ordem Serviço 
-        os: OS
+        os_saida: OS Saída
+        nfe_saida: NFE Saída
         data_relatorio: Dt. Relatório 
         codigo_fiscal: Código Fiscal 
         data_instalacao: Data Instalação
         movimentacao: Movimentação
         nfe_referencia: NFE Referência 
         observacao: Observação 
+        operacao: Operação
       

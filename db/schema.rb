@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20120411213517) do
     t.date     "data_retirada"
     t.string   "os_saida"
     t.string   "nfe_referencia"
+    t.integer  "operacao"
     t.string   "serie"
     t.string   "patrimonio"
     t.integer  "versao_id"
@@ -98,7 +99,6 @@ ActiveRecord::Schema.define(:version => 20120411213517) do
   add_foreign_key "movimentacoes", "versoes", :name => "movimentacoes_versao_id_fk"
 
   add_foreign_key "retiradas", "modelos", :name => "retiradas_modelo_id_fk"
-  add_foreign_key "retiradas", "movimentacoes", :name => "retiradas_movimentacao_id_fk"
   add_foreign_key "retiradas", "tecnicos", :name => "retiradas_tecnico_id_fk"
   add_foreign_key "retiradas", "versoes", :name => "retiradas_versao_id_fk"
 

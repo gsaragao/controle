@@ -92,6 +92,6 @@
 	</tr>
 </table>
 <div class="actionsShow">
-	<a href="<%= edit_movimentacao_path %>"><button class="btn primary" name="btnback"><%= t('botao.editar')%></button></a>&nbsp; 
+	<a href="<%= edit_movimentacao_path(:acao => Movimentacao::ACAO_UPDATE) %>"><button class="btn primary" name="btnback"><%= t('botao.editar')%></button></a>&nbsp; 
 	<a href="<%= movimentacoes_path %>"><button class="btn" name="btnback"><%= t('botao.voltar')%></button></a>
 </div>

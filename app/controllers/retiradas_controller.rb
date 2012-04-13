@@ -8,10 +8,9 @@ class RetiradasController < ApplicationController
 
   def index
     @tecnicos = Tecnico.all(:order => 'nome')
-    @retirada = Retirada.new
+    @retirada = Retirada.new(params[:retirada])
     @retiradas = Retirada.pesquisar(params[:retirada],params[:page])
     respond_with @retiradas
-    
   end
 
   def show
@@ -21,6 +20,7 @@ class RetiradasController < ApplicationController
   def new
     carrega_combos
     @retirada = Retirada.new
+    @retirada.operacao = Retirada::INTERNA
     @retirada.data_retirada = Date.today
     respond_with @retirada
   end
@@ -32,10 +32,17 @@ class RetiradasController < ApplicationController
   def create
     @retirada = Retirada.new(params[:retirada])
     
-    if @retirada.save
+    result = validar_movimentacao
+    
+    if result && @retirada.save
       flash[:notice] = t('msg.create_sucess')
       redirect_to retiradas_path
-    else
+    else 
+      
+      if (!result)
+        flash[:alert] = t('retirada.erro_operacao')
+      end  
+    
       carrega_combos
       render :action => :new 
     end
@@ -75,7 +82,6 @@ class RetiradasController < ApplicationController
     @retirada = Retirada.find(params[:id])
   end
   
-  
   def trata_params
     if (!params[:retirada].nil?) 
        params[:retirada][:data_retirada] = trata_data(params[:retirada][:data_retirada]) if params[:retirada][:data_retirada]
@@ -83,5 +89,19 @@ class RetiradasController < ApplicationController
     end
   end
   
+  def validar_movimentacao
+    if (params[:retirada][:operacao] == Retirada::INTERNA)
+       movimentacao = Movimentacao.new 
+       movimentacao.serie = params[:retirada][:serie]
+       movimentacao.patrimonio = params[:retirada][:patrimonio]
+       movimentacao.tecnico_id = params[:retirada][:tecnico_id]
+       movimentacao.modelo_id = params[:retirada][:modelo_id]
+       movimentacao.versao_id = params[:retirada][:versao_id]
+       @movimentacoes = Movimentacao.valida_movimento(movimentacao)
+       @movimentacoes.size > 0 ? true : false
+    else
+       true 
+    end  
+  end
   
 end

@@ -5,7 +5,7 @@ class DestinosController < ApplicationController
   before_filter :setar_classe_menu
 
   def index
-    @destinos = Destino.all
+    @destinos = Destino.pesquisar(params[:modelo],params[:page])
     respond_with @destinos
   end
 

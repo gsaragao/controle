@@ -5,6 +5,7 @@ class CreateRetiradas < ActiveRecord::Migration
       t.date :data_retirada
       t.string :os_saida
       t.string :nfe_referencia
+      t.integer :operacao
       t.string :serie
       t.string :patrimonio
       t.references :versao

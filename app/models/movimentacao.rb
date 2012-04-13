@@ -81,4 +81,9 @@ class Movimentacao < ActiveRecord::Base
       where(mov).paginate(:page => page).order("id desc")
    end
    
+   def self.valida_movimento(mov)
+      where("serie = ? and patrimonio = ? and tecnico_id = ? and versao_id = ? and modelo_id = ?", 
+      mov.serie, mov.patrimonio, mov.tecnico_id, mov.versao_id, mov.modelo_id )
+   end
+   
 end

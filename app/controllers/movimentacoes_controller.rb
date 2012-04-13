@@ -8,7 +8,7 @@ class MovimentacoesController < ApplicationController
   
   def index
     @tecnicos = Tecnico.all(:order => 'nome')
-    @movimentacao = Movimentacao.new
+    @movimentacao = Movimentacao.new(params[:movimentacao])
     @movimentacoes = Movimentacao.pesquisar(params[:movimentacao],params[:page])
     respond_with @movimentacoes
   end
@@ -51,6 +51,7 @@ class MovimentacoesController < ApplicationController
   end
 
   def update
+    
     if (!params[:movimentacao][:acao].nil? && params[:movimentacao][:acao] == Movimentacao::ACAO_MOVIMENTACAO)
       @ultimo_mov = Movimentacao.ultima_versao(@movimentacao.nid)
       @movimentacao = set_nid_versao_update(@movimentacao, @ultimo_mov)
@@ -74,7 +75,6 @@ class MovimentacoesController < ApplicationController
         render :action => :edit
       end
     end    
-      
   end
 
   def destroy

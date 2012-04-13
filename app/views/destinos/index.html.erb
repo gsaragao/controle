@@ -18,6 +18,9 @@
 	 </tr>
 	<% end %>
 	</table>
+	<div class="apple_pagination">
+	    <%= will_paginate @destinos, :container => false, :next_label => 'Próximo', :previous_label => 'Anterior' %>
+	</div>
 <% end %>
 <br />
 
