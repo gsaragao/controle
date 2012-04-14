@@ -1,6 +1,6 @@
 <h1><%= t("retirada.acao.detalhar") %></h1>
 <table>
-	<tr><td>
+	<tr><td width="33%">
 		<p>
 		  <b> <%= t('retirada.nfe_saida') %>:</b>
 		  <%= @retirada.nfe_saida %>
@@ -35,7 +35,7 @@
 		  <b> <%= t('retirada.versao') %>:</b>
 		  <%= @retirada.versao.descricao if @retirada.versao %>
 		</p>
-         </td><td>
+         </td><td width="33%">
 		<p>
 		  <b> <%= t('retirada.modelo') %>:</b>
 		  <%= @retirada.modelo.descricao if @retirada.modelo %>
@@ -67,6 +67,7 @@
 		</p>
 
 		</td>
+		<td>&nbsp;</td>
 	  </tr>
 	</table>
 	<div class="actionsShow">

@@ -9,6 +9,7 @@ class HomeController < ApplicationController
     @tecnicos = Tecnico.all
     @movimentacoes = Movimentacao.all
     @retiradas = Retirada.all
+    @devolucoes = Devolucao.all
   end  
   
   private

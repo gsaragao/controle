@@ -1,0 +1,129 @@
+<%= form_for(@devolucao) do |f| %>
+<% if @devolucao.errors.any? %>
+	<fieldset id="erros">
+	   <div class="ui-state-error ui-corner-all" style="padding: 5px; width: 50%">
+	     <h3><%= t('errors.messages.titulo') %>:</h3>
+	     <br>
+	     <ul>
+	       <% @devolucao.errors.full_messages.each do |msg| %>
+	           <li><%= msg %></li>
+	         <% end %>
+	     </ul>
+	   </div>
+	</fieldset>
+<% end %>
+<fieldset
+  class="control-group error">
+<table>
+  <tr><td width="40%">
+
+  <div class="clearfix">
+    <%= f.label :destino %>
+    <div class="input">
+ 		<%= f.select :destino_id, options_from_collection_for_select(@destinos,:id,:descricao, @devolucao.destino_id),  
+		:include_blank => true %>
+	</div>	
+ </div>
+  <div class="clearfix">
+    <%= f.label :data_devolucao %>
+    <div class="input">
+ 		<%= f.text_field :data_devolucao, :value => (I18n.l(@devolucao.data_devolucao) if @devolucao.data_devolucao) %>
+    </div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :os_devolucao %>
+    <div class="input">
+		<%= f.text_field :os_devolucao %>
+	</div>	
+  </div>
+  <div class="clearfix">
+    <%= f.label :observacao %>
+    <div class="input">
+		<%= f.text_area :observacao, {:cols => 50, :rows => 10} %>
+	</div>	
+  </div>
+
+  </td><td width="33%">
+	
+<div class="hero-unit-devolucao">	
+  <div class="clearfix">
+    <%= f.label :movimentacao %>
+    <div class="input">
+ 		<%= f.text_field :movimentacao_id, :readonly => "readonly" %>&nbsp;<i class="icon-search" style="cursor: pointer;" onclick="abrir()"></i>
+	</div>	
+  </div>
+  <div class="clearfix">
+    <%= f.label :serie %>
+    <div class="input">
+ 		<%= f.text_field :serie, :value => (@devolucao.movimentacao.serie if @devolucao.movimentacao), :readonly => "readonly" %>
+	</div>	
+  </div>
+  <div class="clearfix">
+    <%= f.label :patrimonio %>
+    <div class="input">
+		<%= f.text_field :patrimonio,:value => (@devolucao.movimentacao.patrimonio if @devolucao.movimentacao), :readonly => "readonly"  %>
+	</div>	
+  </div>
+  <div class="clearfix">
+    <%= f.label :tecnico %>
+    <div class="input">
+ 		<%= f.text_field :tecnico,:value => (@devolucao.movimentacao.tecnico.nome if @devolucao.movimentacao.tecnico), :readonly => "readonly"  %>
+	</div>	
+ </div>
+  <div class="clearfix">
+    <%= f.label :versao %>
+    <div class="input">
+		<%= f.text_field :versao,:value => (@devolucao.movimentacao.versao.descricao if @devolucao.movimentacao.versao), :readonly => "readonly"  %>	
+	</div>	
+  </div>
+  <div class="clearfix">
+    <%= f.label :modelo %>
+    <div class="input">
+		<%= f.text_field :modelo,:value => (@devolucao.movimentacao.modelo.descricao if @devolucao.movimentacao.modelo), :readonly => "readonly"  %>	
+	</div>	
+  </div>
+
+  <div class="clearfix">
+    <%= f.label :nfe_referencia %>
+    <div class="input">
+ 		<%= f.text_field :nfe_referencia,:value => (@devolucao.movimentacao.nota_fiscal if @devolucao.movimentacao), :readonly => "readonly"  %>
+  	</div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :ordem_servico %>
+    <div class="input">
+ 		<%= f.text_field :ordem_servico,:value => (@devolucao.movimentacao.ordem_servico if @devolucao.movimentacao), :readonly => "readonly"  %>
+  	</div>
+  </div>
+</div>
+</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+</fieldset>
+  <div class="actions">
+	<%= f.submit t('botao.salvar'), :class => "btn primary" %>
+    <a href="<%= devolucoes_path %>"><button class="btn" name="btnback"><%= t('botao.cancelar')%></button></a>
+  </div>
+<% end %>
+
+
+<div id="popup_search" style="display:none">
+
+
+</div>
+
+<script>
+
+
+
+$(function() {
+  $('#devolucao_data_devolucao').datepicker({dateFormat : 'dd/mm/yy'});
+});
+
+ function abrir() { 
+	$("#popup_search").load('/movimentacoes/popup');
+ 	$('#popup_search').dialog({ width: 960, height: 400 });
+ }
+
+</script>

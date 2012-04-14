@@ -1,9 +1,10 @@
 # encoding : utf-8
 class MovimentacoesController < ApplicationController
-
-  respond_to :html
+  
+  layout "application", :except => [:popup]
+  respond_to :html, :js
   before_filter :setar_classe_menu
-  before_filter :trata_params, :only => [:index]
+  before_filter :trata_params, :only => [:index, :popup]
   before_filter :carrega_movimentacao , :only => [:show, :edit, :update, :destroy]
   
   def index
@@ -12,7 +13,14 @@ class MovimentacoesController < ApplicationController
     @movimentacoes = Movimentacao.pesquisar(params[:movimentacao],params[:page])
     respond_with @movimentacoes
   end
-
+ 
+  def popup
+    @tecnicos = Tecnico.all(:order => 'nome')
+    @movimentacao = Movimentacao.new(params[:movimentacao])
+    @movimentacoes = Movimentacao.pesquisar(params[:movimentacao],params[:page])
+    respond_with @movimentacoes
+  end
+ 
   def show
     respond_with @movimentacao
   end

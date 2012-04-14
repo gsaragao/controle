@@ -14,7 +14,7 @@
 <% end %>
 <%= f.hidden_field :acao %>
 <table>
-  <tr><td>	 
+  <tr><td width="33%">	 
   <div class="clearfix">
     <%= f.label :tecnico %>
     <div class="input">
@@ -80,7 +80,7 @@
 		<%= f.text_field :data_relatorio, :value => (I18n.l(@movimentacao.data_relatorio) if @movimentacao.data_relatorio) %>
     </div>		 
   </div>
-</td><td>
+</td><td width="33%">
   <div class="clearfix">
     <%= f.label :codigo_fiscal %>
     <div class="input">
@@ -118,6 +118,7 @@
     </div>
   </div>
 </td>
+<td>&nbsp;</td>
 </tr>
 </table>
   <div class="actions">

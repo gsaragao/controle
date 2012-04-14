@@ -1,0 +1,30 @@
+<% if @movimentacoes.size > 0  %>
+ <table class="zebra-striped">
+  <tr>
+    <th width="20%"><%= t('movimentacao.tecnico')%></th>
+    <th width="10%"><%= t('movimentacao.data_mov')%></th>
+    <th width="10%"><%= t('movimentacao.serie')%></th>
+    <th width="10%"><%= t('movimentacao.patrimonio')%></th>
+    <th width="10%"><%= t('movimentacao.data_entrada')%></th>
+    <th width="10%"><%= t('movimentacao.status')%></th>
+  </tr>
+
+ <% @movimentacoes.each do |movimentacao| %>
+  <tr onclick="carregaPai(<%= movimentacao.id %>)" style="cursor: pointer;" id="movimentacao_<%= movimentacao.id %>">
+    <td id="tec<%= movimentacao.id %>"><%= movimentacao.tecnico.nome if movimentacao.tecnico %></td>
+	<td id="dtm<%= movimentacao.id %>"><%= I18n.l(movimentacao.data_movimentacao) if movimentacao.data_movimentacao %></td>
+    <td id="ser<%= movimentacao.id %>"><%= movimentacao.serie %></td>
+    <td id="pat<%= movimentacao.id %>"><%= movimentacao.patrimonio %></td>
+    <td id="dte<%= movimentacao.id %>"><%= I18n.l(movimentacao.data_entrada) if movimentacao.data_entrada %></td>
+    <td id="dat<%= movimentacao.id %>"><%= movimentacao.lista_status.key(movimentacao.status) if movimentacao.status %></td>
+    <input type="hidden" id="mod<%= movimentacao.id %>" value="<%= movimentacao.modelo.descricao if movimentacao.modelo %>" /> 
+    <input type="hidden" id="ver<%= movimentacao.id %>" value="<%= movimentacao.versao.descricao if movimentacao.versao %>" /> 
+	<input type="hidden" id="os<%= movimentacao.id %>" value="<%= movimentacao.ordem_servico %>" /> 
+	<input type="hidden" id="nfe<%= movimentacao.id %>" value="<%= movimentacao.nota_fiscal %>" /> 
+  </tr>
+ <% end %>
+ </table>
+	<div class="apple_pagination">
+	    <%= will_paginate @movimentacoes, :container => false, :next_label => 'Próximo', :previous_label => 'Anterior' %>
+	</div>
+<% end %>

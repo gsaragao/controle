@@ -1,0 +1,48 @@
+<h1><%= t('app.menu.listagem')%>&nbsp;<%= t('app.menu.movimentacao')%></h1>
+<%= form_for(@movimentacao, :html => { :method => :get }, :url => popup_movimentacoes_path, :remote => true) do |f| %>
+
+	<table class="zebra-striped">
+	  <tr>
+	    <th><%= t('movimentacao.tecnico')%></th>
+	    <th><%= t('movimentacao.data_mov')%></th>
+	    <th><%= t('movimentacao.serie')%></th>
+	    <th><%= t('movimentacao.status')%></th>
+	    <th></th>
+	  </tr>
+	  <tr class="pesquisa">
+	    <th><%= f.select :tecnico_id, options_from_collection_for_select(@tecnicos,:id,:nome, @movimentacao.tecnico_id),  
+				:include_blank => true %></th>
+	    <th><%= f.text_field :serie, :value => @movimentacao.serie %></th>
+	    <th><%= f.text_field :data_entrada, :value => (I18n.l(@movimentacao.data_entrada) if @movimentacao.data_entrada) %></th>
+	    <th><%= f.select :status, options_for_select(@movimentacao.lista_status, @movimentacao.status) , :include_blank => true %></th>
+		<th><%= f.submit t('botao.pesquisar'), :class => "btn primary" %></th>
+	  </tr>
+
+	</table>
+<% end %>
+
+ <div id="result">
+
+ </div>	
+
+<br />
+<script>
+
+$(function() {
+  $('#movimentacao_data_movimentacao').datepicker({dateFormat : 'dd/mm/yy'});
+  $('#movimentacao_data_entrada').datepicker({dateFormat : 'dd/mm/yy'});
+  $('#movimentacao_data_relatorio').datepicker({dateFormat : 'dd/mm/yy'});
+});
+
+ function carregaPai(id) {
+	$("#devolucao_movimentacao_id").attr("value", id);
+	$("#devolucao_serie").attr("value", $("#ser" + id).text());
+	$("#devolucao_patrimonio").attr("value", $("#pat" + id).text());
+	$("#devolucao_tecnico").attr("value", $("#tec" + id).text());
+	$("#devolucao_versao").attr("value", $("#ver" + id).val());
+	$("#devolucao_modelo").attr("value", $("#mod" + id).val());
+	$("#devolucao_nfe_referencia").attr("value", $("#nfe" + id).val());
+	$("#devolucao_ordem_servico").attr("value", $("#os" + id).val());
+}
+
+</script>

@@ -5,7 +5,7 @@ class Movimentacao < ActiveRecord::Base
   belongs_to :modelo
   has_attached_file :termo
   validates_presence_of :patrimonio, :tecnico_id, :data_entrada
-  self.per_page = 5
+  self.per_page = 10
   attr_accessor :lista_status, :lista_ativos, :acao
   after_initialize :default_values  
   

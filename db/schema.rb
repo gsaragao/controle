@@ -11,13 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411213517) do
+ActiveRecord::Schema.define(:version => 20120413150033) do
 
   create_table "destinos", :force => true do |t|
     t.string   "descricao"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "devolucoes", :force => true do |t|
+    t.date     "data_devolucao"
+    t.string   "os_devolucao"
+    t.integer  "destino_id"
+    t.text     "observacao"
+    t.integer  "movimentacao_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "devolucoes", ["movimentacao_id"], :name => "index_devolucoes_on_movimentacao_id"
 
   create_table "modelos", :force => true do |t|
     t.string   "descricao"

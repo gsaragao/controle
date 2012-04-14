@@ -1,7 +1,13 @@
 Controle::Application.routes.draw do
+  resources :devolucoes
+
   resources :retiradas
 
-  resources :movimentacoes
+  resources :movimentacoes do 
+    collection do
+      get :popup 
+    end
+  end
 
   resources :destinos
 

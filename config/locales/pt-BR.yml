@@ -12,6 +12,7 @@
       home: Home
       listagem: Listagem
       movimentacao: Movimentação
+      devolucao: Devolução
  
   home:
     titulo: Painel Geral
@@ -76,6 +77,25 @@
     interna: Interna
     externa: Externa
     erro_operacao: 'Não foi encontrado nas movimentações nenhum registro correspondente!'
+
+  devolucao:
+    self: Devolução
+    acao: 
+      novo: Nova Devolução
+      editar: Editar Devolução
+      listar: Listar Devolução
+      detalhar: Detalhes Devolução
+    data_devolucao: Data Devolução
+    observacao: Observação
+    os_devolucao: OS Devolução
+    movimentacao: Movimentação
+    tecnico: Técnico 
+    serie: Série 
+    patrimonio: Patrimônio
+    versao: Versão 
+    modelo: Modelo
+    nfe_referencia: NFE Referência
+    ordem_servico: Ordem Serviço
   
   destino:
     self: Destino
@@ -425,4 +445,16 @@
         nfe_referencia: NFE Referência 
         observacao: Observação 
         operacao: Operação
-      
+
+      devolucao:
+        data_devolucao: Data Devolução
+        observacao: Observação
+        os_devolucao: OS Devolução
+        tecnico: Técnico 
+        serie: Série 
+        patrimonio: Patrimônio 
+        versao: Versão 
+        modelo: Modelo
+        nfe_referencia: NFE Referência
+        ordem_servico: Ordem Serviço
+        movimentacao: Movimentação
