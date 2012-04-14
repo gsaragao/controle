@@ -75,6 +75,20 @@
   </div>
   </td><td width="33%">
   <div class="clearfix">
+    <%= f.label :origem %>
+    <div class="input">
+ 		<%= f.select :origem_id, options_from_collection_for_select(@origens,:id,:descricao, @retirada.origem_id),  
+		:include_blank => true %>
+	</div>	
+ </div>
+  <div class="clearfix">
+    <%= f.label :destino %>
+    <div class="input">
+ 		<%= f.select :destino_id, options_from_collection_for_select(@destinos,:id,:descricao, @retirada.destino_id),  
+		:include_blank => true %>
+	</div>	
+ </div>
+  <div class="clearfix">
     <%= f.label :nfe_referencia %>
     <div class="input">
  		<%= f.text_field :nfe_referencia %>
@@ -111,6 +125,6 @@
 $(function() {
   $('#retirada_data_retirada').datepicker({dateFormat : 'dd/mm/yy'});
   $('#retirada_data_instalacao').datepicker({dateFormat : 'dd/mm/yy'});
-
+  $('#retirada_nfe_saida').focus();
 });
 </script>

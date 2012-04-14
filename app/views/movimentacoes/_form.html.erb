@@ -55,7 +55,7 @@
     </div>
   </div>
   <div class="clearfix">
-    <%= f.label :entrada %>
+    <%= f.label :data_entrada %>
     <div class="input">
       <%= f.text_field :data_entrada, :value => (I18n.l(@movimentacao.data_entrada) if @movimentacao.data_entrada) %>
     </div>
@@ -132,6 +132,7 @@ $(function() {
   $('#movimentacao_data_entrada').datepicker({dateFormat : 'dd/mm/yy'});
   $('#movimentacao_data_relatorio').datepicker({dateFormat : 'dd/mm/yy'});
   $('#movimentacao_data_nota_fiscal').datepicker({dateFormat : 'dd/mm/yy'});
-
+  $('#movimentacao_serie').focus();
 });
+
 </script>

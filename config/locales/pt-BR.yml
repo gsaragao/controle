@@ -5,7 +5,7 @@
     nome: Controle
     nome_completo: Controle
     menu: 
-      destino: Destino
+      endereco: Endereço
       versao: Versão
       tecnico: Técnico
       modelo: Modelo
@@ -97,14 +97,15 @@
     nfe_referencia: NFE Referência
     ordem_servico: Ordem Serviço
   
-  destino:
-    self: Destino
+  endereco:
+    self: Endereço
     acao: 
-      novo: Novo Destino
-      editar: Editar Destino
-      listar: Listar Destino
-      detalhar: Detalhes Destino
+      novo: Novo Endereço
+      editar: Editar Endereço
+      listar: Listar Endereço
+      detalhar: Detalhes Endereço
     descricao: Descrição
+    tipo: Tipo
 
   versao:
     self: Versão
@@ -393,8 +394,9 @@
         format: "%{attribute}%{message}"
     
     attributes:
-      destino:
+      endereco:
         descricao: Descrição
+        tipo: Tipo
 
       versao:
         descricao: Descrição
@@ -458,3 +460,5 @@
         nfe_referencia: NFE Referência
         ordem_servico: Ordem Serviço
         movimentacao: Movimentação
+        movimentacao_id: Movimentação
+        

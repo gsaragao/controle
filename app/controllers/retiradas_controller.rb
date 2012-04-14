@@ -50,11 +50,18 @@ class RetiradasController < ApplicationController
   end
 
   def update
+    
+    result = validar_movimentacao
 
-    if @retirada.update_attributes(params[:retirada])
+    if result && @retirada.update_attributes(params[:retirada])
       flash[:notice] = t('msg.update_sucess')
       redirect_to retiradas_path
     else
+      
+      if (!result)
+        flash[:alert] = t('retirada.erro_operacao')
+      end  
+      
       carrega_combos
       render :action => :edit
     end
@@ -76,6 +83,8 @@ class RetiradasController < ApplicationController
     @tecnicos = Tecnico.all(:order => "nome")
     @modelos = Modelo.all(:order => "descricao")
     @versoes = Versao.all(:order => "descricao")
+    @origens = Endereco.pesquisar_tipo(Endereco::ORIGEM)
+    @destinos = Endereco.pesquisar_tipo(Endereco::DESTINO)
   end
   
   def carrega_retirada

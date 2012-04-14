@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   before_filter :setar_classe_menu
   
   def index
-    @destinos = Destino.all
+    @enderecos = Endereco.all
     @modelos = Modelo.all
     @versoes = Versao.all
     @tecnicos = Tecnico.all

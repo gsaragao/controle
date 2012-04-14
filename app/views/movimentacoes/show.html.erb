@@ -78,11 +78,7 @@
 	  <b><%= t('movimentacao.observacao')%>:</b>
 	  <%= @movimentacao.observacao %>
 	</p>
-	<p>
-	  <b><%= t('movimentacao.retirado')%>:</b>
-	  <%= @movimentacao.retirado %>
-	</p>
-	
+
 	<p>
 	  <b><%= t('movimentacao.termo')%>:</b>
 	  <%= link_to "#{@movimentacao.termo_file_name}", @movimentacao.termo.url, :target => "_blank" %>

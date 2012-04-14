@@ -3,9 +3,10 @@ class Retirada < ActiveRecord::Base
   belongs_to :versao
   belongs_to :modelo
   belongs_to :tecnico
+  belongs_to :destino
   self.per_page = 10
   attr_accessor :operacoes
-  validates_presence_of :tecnico_id, :os_saida, :serie, :patrimonio
+  validates_presence_of :destino_id, :tecnico_id, :os_saida, :serie, :patrimonio
   after_initialize :default_values  
   
   def default_values

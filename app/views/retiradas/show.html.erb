@@ -35,17 +35,12 @@
 		  <b> <%= t('retirada.versao') %>:</b>
 		  <%= @retirada.versao.descricao if @retirada.versao %>
 		</p>
-         </td><td width="33%">
 		<p>
 		  <b> <%= t('retirada.modelo') %>:</b>
 		  <%= @retirada.modelo.descricao if @retirada.modelo %>
 		</p>
 
-		<p>
-		  <b> <%= t('retirada.tecnico') %>:</b>
-		  <%= @retirada.tecnico.nome if @retirada.tecnico %>
-		</p>
-
+         </td><td width="33%">
 		<p>
 		  <b> <%= t('retirada.data_instalacao') %>:</b>
 		  <%= @retirada.data_instalacao %>

@@ -1,0 +1,15 @@
+<h1><%= t("endereco.acao.detalhar") %></h1>
+<hr>
+<p>
+  <b><%= t('endereco.descricao')%>:</b>
+  <%= @endereco.descricao %>
+</p>
+<p>
+  <b><%= t('endereco.tipo')%>:</b>
+  <%= ori_des(@endereco.tipo) %>
+</p>
+
+<div class="actionsShow">
+	<a href="<%= edit_endereco_path %>"><button class="btn primary" name="btnback"><%= t('botao.editar')%></button></a>&nbsp; 
+	<a href="<%= enderecos_path %>"><button class="btn" name="btnback"><%= t('botao.voltar')%></button></a>
+</div>

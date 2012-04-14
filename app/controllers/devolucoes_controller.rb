@@ -7,7 +7,7 @@ class DevolucoesController < ApplicationController
   before_filter :carrega_devolucao , :only => [:show, :edit, :update, :destroy]
 
     def index
-      @destinos = Destino.all(:order => 'descricao')
+      carrega_combos
       @devolucao = Devolucao.new(params[:devolucao])
       @devolucoes = Devolucao.pesquisar(params[:devolucao],params[:page])
       respond_with @devolucoes
@@ -18,14 +18,14 @@ class DevolucoesController < ApplicationController
     end
 
     def new
-      @destinos = Destino.all(:order => 'descricao')
+      carrega_combos
       @devolucao = Devolucao.new
       @devolucao.data_devolucao = Date.today
       respond_with @devolucao
     end
 
     def edit
-      @destinos = Destino.all(:order => 'descricao')
+      carrega_combos
     end
 
     def create
@@ -35,7 +35,7 @@ class DevolucoesController < ApplicationController
         flash[:notice] = t('msg.create_sucess')
         redirect_to devolucoes_path
       else 
-        @destinos = Destino.all(:order => 'descricao')
+        carrega_combos
         render :action => :new 
       end
 
@@ -46,7 +46,7 @@ class DevolucoesController < ApplicationController
         flash[:notice] = t('msg.update_sucess')
         redirect_to devolucoes_path
       else
-        @destinos = Destino.all(:order => 'descricao')
+        carrega_combos
         render :action => :edit
       end
     end
@@ -58,7 +58,12 @@ class DevolucoesController < ApplicationController
     end
 
     private
-
+    
+    def carrega_combos 
+      @origens = Endereco.pesquisar_tipo(Endereco::ORIGEM)
+      @destinos = Endereco.pesquisar_tipo(Endereco::DESTINO)
+    end
+    
     def setar_classe_menu
       @class_devolucao = 'active'  
     end

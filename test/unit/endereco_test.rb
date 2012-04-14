@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DestinoTest < ActiveSupport::TestCase
+class EnderecoTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

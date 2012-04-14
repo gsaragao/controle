@@ -1,0 +1,39 @@
+<%= form_for(@endereco) do |f| %>
+<% if @endereco.errors.any? %>
+<fieldset id="erros">
+   <div class="ui-state-error ui-corner-all" style="padding: 5px; width: 50%">
+     <h3><%= t('errors.messages.titulo') %>:</h3>
+     <br>
+     <ul>
+       <% @endereco.errors.full_messages.each do |msg| %>
+           <li><%= msg %></li>
+         <% end %>
+     </ul>
+   </div>
+</fieldset>
+<% end %>
+<hr>
+  <div class="clearfix">
+    <%= f.label :descricao %>
+   <div class="input">
+    	<%= f.text_field :descricao %>
+   </div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :tipo %>
+    <div class="input">
+ 		<%= t('endereco.origem') %>&nbsp;<%= f.radio_button :tipo, '1' %>&nbsp;
+		<%= t('endereco.destino') %>&nbsp;<%= f.radio_button :tipo, '0' %>
+  	</div>
+  </div>
+  <div class="actions">
+	<%= f.submit t('botao.salvar'), :class => "btn primary" %>
+    <a href="<%= enderecos_path %>"><button class="btn" name="btnback"><%= t('botao.cancelar')%></button></a>
+  </div>
+<% end %>
+
+<script>
+
+ $('#endereco_descricao').focus();
+
+</script>

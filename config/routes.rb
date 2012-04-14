@@ -9,7 +9,7 @@ Controle::Application.routes.draw do
     end
   end
 
-  resources :destinos
+  resources :enderecos
 
   resources :modelos
 

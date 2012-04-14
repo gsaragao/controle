@@ -3,14 +3,11 @@
 
 	<table class="zebra-striped">
 	  <tr>
-		<th><%= t('devolucao.destino')%></th>
 	    <th><%= t('devolucao.data_devolucao')%></th>
 	    <th><%= t('devolucao.os_devolucao')%></th>
 	    <th width="50%"></th>
 	  </tr>
 	  <tr class="pesquisa">
-		<th><%= f.select :destino_id, options_from_collection_for_select(@destinos,:id,:descricao, @devolucao.destino_id),  
-				:include_blank => true %></th>
 	    <th><%= f.text_field :data_devolucao, :value => (I18n.l(@devolucao.data_devolucao) if @devolucao.data_devolucao) %></th>
 	    <th><%= f.text_field :os_devolucao, :value => (@devolucao.os_devolucao if @devolucao.os_devolucao) %></th>
 		<th><%= f.submit t('botao.pesquisar'), :class => "btn primary" %></th>
@@ -21,12 +18,11 @@
 	<% if @devolucoes.size > 0  %>
 	 <table class="zebra-striped">
 	  <tr>
-		<th width="15%"><%= t('devolucao.destino')%></th>
 	    <th width="15%"><%= t('devolucao.data_devolucao')%></th>
 	    <th width="15%"><%= t('devolucao.os_devolucao')%></th>
-    	<th width="10%"><%= t('devolucao.movimentacao')%></th>
-        <th width="10%"><%= t('devolucao.serie')%></th>
-        <th width="10%"><%= t('devolucao.patrimonio')%></th>
+    	<th width="15%"><%= t('devolucao.movimentacao')%></th>
+        <th width="15%"><%= t('devolucao.serie')%></th>
+        <th width="15%"><%= t('devolucao.patrimonio')%></th>
 	 	<th></th>
 	    <th></th>
 	    <th></th>
@@ -34,7 +30,6 @@
 
 	<% @devolucoes.each do |devolucao| %>
 	  <tr>
-		<td><%= devolucao.destino.descricao if devolucao.destino %></td>
 	    <td><%= I18n.l(devolucao.data_devolucao) if devolucao.data_devolucao %></td>
 	    <td><%= devolucao.os_devolucao %></td>
 		<td><%= devolucao.movimentacao.id if devolucao.movimentacao %></td>

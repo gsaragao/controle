@@ -1,0 +1,29 @@
+<h1><%= t('app.menu.listagem')%>&nbsp;<%= t('app.menu.endereco')%></h1>
+
+<% if @enderecos.size > 0  %>
+	<table class="zebra-striped">
+	 <tr>
+	   <th width="50%"><%= t('endereco.descricao')%></th>
+       <th width="20%"><%= t('endereco.tipo')%></th>
+	   <th></th>
+	   <th></th>
+	   <th></th>
+	 </tr>
+
+	<% @enderecos.each do |endereco| %>
+	 <tr>
+	   <td><%= endereco.descricao %></td>
+	   <td><%= ori_des(endereco.tipo) %></td>
+	    <td><%= link_to t('botao.detalhes'), endereco %></td>
+	    <td><%= link_to t('botao.editar'), edit_endereco_path(endereco) %></td>
+	    <td><%= link_to t('botao.excluir'), endereco, confirm: 'Tem certeza que deseja excluir este registro?', method: :delete %></td>
+	 </tr>
+	<% end %>
+	</table>
+	<div class="apple_pagination">
+	    <%= will_paginate @enderecos, :container => false, :next_label => 'Próximo', :previous_label => 'Anterior' %>
+	</div>
+<% end %>
+<br />
+
+<a href="<%= new_endereco_path %>"><button class="btn" name="btnpesquisa"><%= t('endereco.acao.novo')%></button></a>

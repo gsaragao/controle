@@ -18,12 +18,19 @@
   <tr><td width="40%">
 
   <div class="clearfix">
+    <%= f.label :origem %>
+    <div class="input">
+ 		<%= f.select :origem_id, options_from_collection_for_select(@origens,:id,:descricao, @devolucao.origem_id),  
+		:include_blank => true %>
+	</div>	
+  </div>
+  <div class="clearfix">
     <%= f.label :destino %>
     <div class="input">
  		<%= f.select :destino_id, options_from_collection_for_select(@destinos,:id,:descricao, @devolucao.destino_id),  
 		:include_blank => true %>
 	</div>	
- </div>
+  </div>
   <div class="clearfix">
     <%= f.label :data_devolucao %>
     <div class="input">
@@ -67,19 +74,19 @@
   <div class="clearfix">
     <%= f.label :tecnico %>
     <div class="input">
- 		<%= f.text_field :tecnico,:value => (@devolucao.movimentacao.tecnico.nome if @devolucao.movimentacao.tecnico), :readonly => "readonly"  %>
+ 		<%= f.text_field :tecnico,:value => (@devolucao.movimentacao.tecnico.nome if @devolucao.movimentacao &&  @devolucao.movimentacao.tecnico), :readonly => "readonly"  %>
 	</div>	
  </div>
   <div class="clearfix">
     <%= f.label :versao %>
     <div class="input">
-		<%= f.text_field :versao,:value => (@devolucao.movimentacao.versao.descricao if @devolucao.movimentacao.versao), :readonly => "readonly"  %>	
+		<%= f.text_field :versao,:value => (@devolucao.movimentacao.versao.descricao if @devolucao.movimentacao &&  @devolucao.movimentacao.versao), :readonly => "readonly"  %>	
 	</div>	
   </div>
   <div class="clearfix">
     <%= f.label :modelo %>
     <div class="input">
-		<%= f.text_field :modelo,:value => (@devolucao.movimentacao.modelo.descricao if @devolucao.movimentacao.modelo), :readonly => "readonly"  %>	
+		<%= f.text_field :modelo,:value => (@devolucao.movimentacao.modelo.descricao if @devolucao.movimentacao &&  @devolucao.movimentacao.modelo), :readonly => "readonly"  %>	
 	</div>	
   </div>
 
@@ -107,21 +114,17 @@
   </div>
 <% end %>
 
-
-<div id="popup_search" style="display:none">
-
-
-</div>
-
 <script>
-
-
 
 $(function() {
   $('#devolucao_data_devolucao').datepicker({dateFormat : 'dd/mm/yy'});
 });
 
  function abrir() { 
+	var div = "<div id='popup_search' style='display:none'></div> ";
+	$("#popup_search").remove();
+	$(document.body).append(div);
+	
 	$("#popup_search").load('/movimentacoes/popup');
  	$('#popup_search').dialog({ width: 960, height: 400 });
  }

@@ -1,23 +1,21 @@
 <h1><%= t('app.menu.listagem')%>&nbsp;<%= t('app.menu.movimentacao')%></h1>
 <%= form_for(@movimentacao, :html => { :method => :get }, :url => popup_movimentacoes_path, :remote => true) do |f| %>
-
+    
 	<table class="zebra-striped">
 	  <tr>
 	    <th><%= t('movimentacao.tecnico')%></th>
-	    <th><%= t('movimentacao.data_mov')%></th>
 	    <th><%= t('movimentacao.serie')%></th>
-	    <th><%= t('movimentacao.status')%></th>
+	    <th><%= t('movimentacao.data_mov')%></th>
 	    <th></th>
 	  </tr>
 	  <tr class="pesquisa">
 	    <th><%= f.select :tecnico_id, options_from_collection_for_select(@tecnicos,:id,:nome, @movimentacao.tecnico_id),  
 				:include_blank => true %></th>
 	    <th><%= f.text_field :serie, :value => @movimentacao.serie %></th>
-	    <th><%= f.text_field :data_entrada, :value => (I18n.l(@movimentacao.data_entrada) if @movimentacao.data_entrada) %></th>
-	    <th><%= f.select :status, options_for_select(@movimentacao.lista_status, @movimentacao.status) , :include_blank => true %></th>
+	    <th><%= f.text_field :data_movimentacao, :value => (I18n.l(@movimentacao.data_movimentacao) if @movimentacao.data_movimentacao) %></th>
 		<th><%= f.submit t('botao.pesquisar'), :class => "btn primary" %></th>
 	  </tr>
-
+          <%= f.hidden_field :status, :value => Movimentacao::BAD %>
 	</table>
 <% end %>
 
@@ -43,6 +41,7 @@ $(function() {
 	$("#devolucao_modelo").attr("value", $("#mod" + id).val());
 	$("#devolucao_nfe_referencia").attr("value", $("#nfe" + id).val());
 	$("#devolucao_ordem_servico").attr("value", $("#os" + id).val());
+	$("#popup_search").remove();
 }
 
 </script>
