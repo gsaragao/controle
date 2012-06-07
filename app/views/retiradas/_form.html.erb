@@ -35,46 +35,11 @@
   <div class="clearfix">
     <%= f.label :operacao %>
     <div class="input">
- 		<%= t('retirada.interna') %>&nbsp;<%= f.radio_button :operacao, 1 %>&nbsp;
-		<%= t('retirada.externa') %>&nbsp;<%= f.radio_button :operacao, 0 %>
+ 		<%= t('retirada.interna') %>&nbsp;<%= f.radio_button :operacao, Retirada::INTERNA %>&nbsp;
+		<%= t('retirada.externa') %>&nbsp;<%= f.radio_button :operacao, Retirada::EXTERNA %>
   	</div>
   </div>
-
-  <div class="clearfix">
-    <%= f.label :serie %>
-    <div class="input">
- 		<%= f.text_field :serie %>
-	</div>	
-  </div>
-  <div class="clearfix">
-    <%= f.label :patrimonio %>
-    <div class="input">
-		<%= f.text_field :patrimonio %>
-	</div>	
-  </div>
-  <div class="clearfix">
-    <%= f.label :tecnico %>
-    <div class="input">
- 		<%= f.select :tecnico_id, options_from_collection_for_select(@tecnicos,:id,:nome, @retirada.tecnico_id),  
-		:include_blank => true %>
-	</div>	
- </div>
-  <div class="clearfix">
-    <%= f.label :versao %>
-    <div class="input">
-  		<%= f.select :versao_id, options_from_collection_for_select(@versoes,:id,:descricao, @retirada.versao_id),  
-		:include_blank => true %>
-	</div>	
-  </div>
-  <div class="clearfix">
-    <%= f.label :modelo %>
-    <div class="input">
- 		<%= f.select :modelo_id, options_from_collection_for_select(@modelos,:id,:descricao, @retirada.modelo_id),  
-		:include_blank => true %>
-	</div>	
-  </div>
-  </td><td width="33%">
-  <div class="clearfix">
+<div class="clearfix">
     <%= f.label :origem %>
     <div class="input">
  		<%= f.select :origem_id, options_from_collection_for_select(@origens,:id,:descricao, @retirada.origem_id),  
@@ -88,6 +53,50 @@
 		:include_blank => true %>
 	</div>	
  </div>
+  <div class="clearfix">
+    <%= f.label :observacao %>
+    <div class="input">
+		<%= f.text_area :observacao, {:cols => 40, :rows => 8} %>
+	</div>	
+  </div>
+  
+  </td><td width="33%">
+	<div class="hero-unit-retirada"  id="divExterna" style="display:none">	
+		<h4>Externa</h4><br>
+	<div class="clearfix">
+	    <%= f.label :serie %>
+	    <div class="input">
+	 		<%= f.text_field :serie %>
+		</div>	
+	  </div>
+	<div class="clearfix">
+	    <%= f.label :patrimonio %>
+	    <div class="input">
+			<%= f.text_field :patrimonio %>
+		</div>	
+	  </div>
+  	  <div class="clearfix">
+	    <%= f.label :tecnico %>
+	    <div class="input">
+	 		<%= f.select :tecnico_id, options_from_collection_for_select(@tecnicos,:id,:nome, @retirada.tecnico_id),  
+			:include_blank => true %>
+		</div>	
+	 </div>
+	  <div class="clearfix">
+	    <%= f.label :versao %>
+	    <div class="input">
+	  		<%= f.select :versao_id, options_from_collection_for_select(@versoes,:id,:descricao, @retirada.versao_id),  
+			:include_blank => true %>
+		</div>	
+	  </div>
+	  <div class="clearfix">
+	    <%= f.label :modelo %>
+	    <div class="input">
+	 		<%= f.select :modelo_id, options_from_collection_for_select(@modelos,:id,:descricao, @retirada.modelo_id),  
+			:include_blank => true %>
+		</div>	
+	  </div>
+
   <div class="clearfix">
     <%= f.label :nfe_referencia %>
     <div class="input">
@@ -106,14 +115,68 @@
  		<%= f.text_field :ordem_servico %>
   	</div>
   </div>
-  <div class="clearfix">
-    <%= f.label :observacao %>
-    <div class="input">
-		<%= f.text_area :observacao, {:cols => 50, :rows => 10} %>
-	</div>	
-  </div>
+</div>
+<div class="hero-unit-retirada" id="divInterna">	
+	<h4>Interna</h4><br>
+	  <div class="clearfix">
+	    <%= f.label :movimentacao %>
+	    <div class="input">
+	 		<%= f.text_field :movimentacao_id, :readonly => "readonly" %>&nbsp;<i class="icon-search" style="cursor: pointer;" onclick="abrir()"></i>
+		</div>	
+	  </div>
+	  <div class="clearfix">
+	    <%= f.label :serie %>
+	    <div class="input">
+	 		<%= f.text_field :serie_mov, :value => (@retirada.movimentacao.serie if @retirada.movimentacao), :readonly => "readonly" %>
+		</div>	
+	  </div>
+	  <div class="clearfix">
+	    <%= f.label :patrimonio %>
+	    <div class="input">
+			<%= f.text_field :patrimonio_mov,:value => (@retirada.movimentacao.patrimonio if @retirada.movimentacao), :readonly => "readonly"  %>
+		</div>	
+	  </div>
+	  <div class="clearfix">
+	    <%= f.label :tecnico %>
+	    <div class="input">
+	 		<%= f.text_field :tecnico_mov,:value => (@retirada.movimentacao.tecnico.nome if @retirada.movimentacao &&  @retirada.movimentacao.tecnico), :readonly => "readonly"  %>
+		</div>	
+	 </div>
+	  <div class="clearfix">
+	    <%= f.label :versao %>
+	    <div class="input">
+			<%= f.text_field :versao_mov,:value => (@retirada.movimentacao.versao.descricao if @retirada.movimentacao &&  @retirada.movimentacao.versao), :readonly => "readonly"  %>	
+		</div>	
+	  </div>
+	  <div class="clearfix">
+	    <%= f.label :modelo %>
+	    <div class="input">
+			<%= f.text_field :modelo_mov,:value => (@retirada.movimentacao.modelo.descricao if @retirada.movimentacao &&  @retirada.movimentacao.modelo), :readonly => "readonly"  %>	
+		</div>	
+	  </div>
+
+	  <div class="clearfix">
+	    <%= f.label :nfe_referencia %>
+	    <div class="input">
+	 		<%= f.text_field :nfe_referencia_mov,:value => (@retirada.movimentacao.nota_fiscal if @retirada.movimentacao), :readonly => "readonly"  %>
+	  	</div>
+	  </div>
+	  <div class="clearfix">
+	    <%= f.label :data_instalacao %>
+	    <div class="input">
+	 		<%= f.text_field :data_instalacao_mov, :value => (I18n.l(@retirada.movimentacao.data_movimentacao) if @retirada.movimentacao), :readonly => "readonly" %>
+	   </div> 
+	   </div>
+	  <div class="clearfix">
+	    <%= f.label :ordem_servico %>
+	    <div class="input">
+	 		<%= f.text_field :ordem_servico_mov,:value => (@retirada.movimentacao.ordem_servico if @retirada.movimentacao), :readonly => "readonly"  %>
+	  	</div>
+	  </div>
+	</div>
+	
 </td>
-<td>&nbsp;</td>
+<td width="30%"></td>
 </tr>
 </table>
   <div class="actions">
@@ -122,9 +185,64 @@
   </div>
 <% end %>
 <script>
+
+function abrir() { 
+	var div = "<div id='popup_search' style='display:none'></div> ";
+	$("#popup_search").remove();
+	$(document.body).append(div);
+	
+	$("#popup_search").load('/movimentacoes/popup');
+ 	$('#popup_search').dialog({ width: 960, height: 400 });
+ }
+
+
+
 $(function() {
+  
+  $('#retirada_operacao_0').change(function() {controlaDivExterna();});	
+  $('#retirada_operacao_1').change(function() {controlaDivInterna();});
+	
   $('#retirada_data_retirada').datepicker({dateFormat : 'dd/mm/yy'});
   $('#retirada_data_instalacao').datepicker({dateFormat : 'dd/mm/yy'});
   $('#retirada_nfe_saida').focus();
+  verificaOperacao();
 });
+
+ function controlaDivExterna() {
+	$("#retirada_movimentacao_id").val("");
+	$("#retirada_serie_mov").val("");
+	$("#retirada_patrimonio_mov").val("");
+	$("#retirada_tecnico_mov").val("");
+	$("#retirada_versao_mov").val("");
+	$("#retirada_modelo_mov").val("");
+	$("#retirada_nfe_referencia_mov").val("");
+	$("#retirada_data_instalacao_mov").val("");
+	$("#retirada_ordem_servico_mov").val("");
+	$("#divExterna").css("display", "block");
+	$("#divInterna").css("display", "none");
+}
+
+ function controlaDivInterna() {
+	$("#retirada_serie").val("");
+	$("#retirada_patrimonio").val("");
+	$("#retirada_tecnico_id").val("");
+	$("#retirada_versao_id").val("");
+	$("#retirada_modelo_id").val("");
+	$("#retirada_nfe_referencia").val("");
+	$("#retirada_data_instalacao").val("");
+	$("#retirada_ordem_servico").val("");
+	$("#divExterna").css("display", "none");
+	$("#divInterna").css("display", "block");
+ }
+ 
+ function verificaOperacao() {
+	
+   if ($('#retirada_operacao_0:checked').val() == 0) { 
+	controlaDivExterna();
+   } else {
+	 controlaDivInterna();
+   }	
+ }
+
+
 </script>

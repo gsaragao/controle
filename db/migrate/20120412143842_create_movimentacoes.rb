@@ -23,17 +23,14 @@ class CreateMovimentacoes < ActiveRecord::Migration
       t.string :termo_content_type
       t.integer :termo_file_size
       t.datetime :termo_updated_at
-      t.references :retirada
       t.timestamps
     end
     add_index :movimentacoes, :tecnico_id
     add_index :movimentacoes, :versao_id
     add_index :movimentacoes, :modelo_id
-    add_index :movimentacoes, :retirada_id
     add_foreign_key(:movimentacoes, :versoes)
     add_foreign_key(:movimentacoes, :modelos)
     add_foreign_key(:movimentacoes, :tecnicos)
-    add_foreign_key(:movimentacoes, :retiradas)
   end
 end
 

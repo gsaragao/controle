@@ -53,7 +53,7 @@
 		
 		<p>
 		  <b> <%= t('retirada.operacao') %>:</b>
-		  <%= ext_int(@retirada.operacao) %>
+		  <%= @retirada.operacoes.key(@retirada.operacao) %>
 		</p>
 
 		<p>

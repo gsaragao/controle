@@ -17,7 +17,7 @@ class MovimentacoesController < ApplicationController
   def popup
     @tecnicos = Tecnico.all(:order => 'nome')
     @movimentacao = Movimentacao.new(params[:movimentacao])
-    @movimentacoes = Movimentacao.pesquisar(params[:movimentacao],params[:page])
+    @movimentacoes = Movimentacao.pesquisar_popup(params[:movimentacao],params[:page])
     respond_with @movimentacoes
   end
  

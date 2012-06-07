@@ -3,6 +3,7 @@ class Movimentacao < ActiveRecord::Base
   belongs_to :tecnico
   belongs_to :versao
   belongs_to :modelo
+  has_many :retiradas
   has_attached_file :termo
   validates_presence_of :patrimonio, :tecnico_id, :data_entrada
   self.per_page = 10
@@ -81,9 +82,7 @@ class Movimentacao < ActiveRecord::Base
       where(mov).paginate(:page => page).order("id desc")
    end
    
-   def self.valida_movimento(mov)
-      where("serie = ? and patrimonio = ? and tecnico_id = ? and versao_id = ? and modelo_id = ?", 
-      mov.serie, mov.patrimonio, mov.tecnico_id, mov.versao_id, mov.modelo_id )
+   def self.pesquisar_popup(mov, page)
+      where("status in (2,3)").paginate(:page => page).order("id desc")
    end
-   
 end

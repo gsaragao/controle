@@ -15,7 +15,6 @@
 	    <th><%= f.text_field :data_movimentacao, :value => (I18n.l(@movimentacao.data_movimentacao) if @movimentacao.data_movimentacao) %></th>
 		<th><%= f.submit t('botao.pesquisar'), :class => "btn primary" %></th>
 	  </tr>
-          <%= f.hidden_field :status, :value => Movimentacao::BAD %>
 	</table>
 <% end %>
 
@@ -33,14 +32,15 @@ $(function() {
 });
 
  function carregaPai(id) {
-	$("#devolucao_movimentacao_id").attr("value", id);
-	$("#devolucao_serie").attr("value", $("#ser" + id).text());
-	$("#devolucao_patrimonio").attr("value", $("#pat" + id).text());
-	$("#devolucao_tecnico").attr("value", $("#tec" + id).text());
-	$("#devolucao_versao").attr("value", $("#ver" + id).val());
-	$("#devolucao_modelo").attr("value", $("#mod" + id).val());
-	$("#devolucao_nfe_referencia").attr("value", $("#nfe" + id).val());
-	$("#devolucao_ordem_servico").attr("value", $("#os" + id).val());
+	$("#retirada_movimentacao_id").attr("value", id);
+	$("#retirada_serie_mov").attr("value", $("#ser" + id).text());
+	$("#retirada_patrimonio_mov").attr("value", $("#pat" + id).text());
+	$("#retirada_tecnico_mov").attr("value", $("#tec" + id).text());
+	$("#retirada_versao_mov").attr("value", $("#ver" + id).val());
+	$("#retirada_modelo_mov").attr("value", $("#mod" + id).val());
+	$("#retirada_nfe_referencia_mov").attr("value", $("#nfe" + id).val());
+	$("#retirada_ordem_servico_mov").attr("value", $("#os" + id).val());
+	$("#retirada_data_instalacao_mov").attr("value", $("#dtm" + id).text());
 	$("#popup_search").remove();
 }
 

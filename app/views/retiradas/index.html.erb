@@ -27,7 +27,7 @@
 	<% if @retiradas.size > 0  %>
 	 <table class="zebra-striped">
 	  <tr>
-	    <th width="20%"><%= t('retirada.tecnico')%></th>
+	    <th width="15%"><%= t('retirada.tecnico')%></th>
 	    <th width="10%"><%= t('retirada.data_retirada')%></th>
 	    <th width="10%"><%= t('retirada.serie')%></th>
 	    <th width="10%"><%= t('retirada.patrimonio')%></th>
@@ -49,7 +49,7 @@
 	    <td><%= retirada.os_saida %></td>
 	    <td><%= retirada.nfe_saida %></td>
 		<td><%= retirada.nfe_referencia %></td>
-		<td><%= ext_int(retirada.operacao) %></td>
+		<td><%= retirada.operacoes.key(retirada.operacao) %></td>
 	    <td><%= link_to t('botao.detalhes'), retirada %></td>
 	    <td><%= link_to t('botao.editar'), edit_retirada_path(retirada) %></td>
 	    <td><%= link_to t('botao.excluir'), retirada, confirm: 'Tem certeza que deseja excluir este registro?', method: :delete %></td>

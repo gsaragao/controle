@@ -10,10 +10,18 @@ class RetiradasController < ApplicationController
     @tecnicos = Tecnico.all(:order => 'nome')
     @retirada = Retirada.new(params[:retirada])
     @retiradas = Retirada.pesquisar(params[:retirada],params[:page])
+    
+    if (@retiradas.size > 0)
+       @retiradas.each {|ret|
+         carrega_interna(ret)
+       }
+    end
+    
     respond_with @retiradas
   end
 
   def show
+    carrega_interna(@retirada)    
     respond_with @retirada
   end
 
@@ -32,17 +40,10 @@ class RetiradasController < ApplicationController
   def create
     @retirada = Retirada.new(params[:retirada])
     
-    result = validar_movimentacao
-    
-    if result && @retirada.save
+    if @retirada.save
       flash[:notice] = t('msg.create_sucess')
       redirect_to retiradas_path
     else 
-      
-      if (!result)
-        flash[:alert] = t('retirada.erro_operacao')
-      end  
-    
       carrega_combos
       render :action => :new 
     end
@@ -51,17 +52,10 @@ class RetiradasController < ApplicationController
 
   def update
     
-    result = validar_movimentacao
-
-    if result && @retirada.update_attributes(params[:retirada])
+    if @retirada.update_attributes(params[:retirada])
       flash[:notice] = t('msg.update_sucess')
       redirect_to retiradas_path
     else
-      
-      if (!result)
-        flash[:alert] = t('retirada.erro_operacao')
-      end  
-      
       carrega_combos
       render :action => :edit
     end
@@ -98,19 +92,18 @@ class RetiradasController < ApplicationController
     end
   end
   
-  def validar_movimentacao
-    if (params[:retirada][:operacao] == Retirada::INTERNA)
-       movimentacao = Movimentacao.new 
-       movimentacao.serie = params[:retirada][:serie]
-       movimentacao.patrimonio = params[:retirada][:patrimonio]
-       movimentacao.tecnico_id = params[:retirada][:tecnico_id]
-       movimentacao.modelo_id = params[:retirada][:modelo_id]
-       movimentacao.versao_id = params[:retirada][:versao_id]
-       @movimentacoes = Movimentacao.valida_movimento(movimentacao)
-       @movimentacoes.size > 0 ? true : false
-    else
-       true 
-    end  
+  def carrega_interna(retirada)
+    
+    if (retirada.operacao == Retirada::INTERNA)
+        retirada.serie = retirada.movimentacao.serie
+      	retirada.patrimonio = retirada.movimentacao.patrimonio
+      	retirada.tecnico_id = retirada.movimentacao.tecnico_id
+      	retirada.versao_id = retirada.movimentacao.versao_id
+      	retirada.modelo_id = retirada.movimentacao.modelo_id
+      	retirada.nfe_referencia = retirada.movimentacao.nfe
+      	retirada.data_instalacao = retirada.movimentacao.data_movimentacao
+      	retirada.ordem_servico = retirada.movimentacao.ordem_servico
+	  end
   end
   
 end
